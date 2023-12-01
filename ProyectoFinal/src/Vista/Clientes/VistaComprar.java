@@ -338,5 +338,12 @@ public class VistaComprar extends javax.swing.JFrame {
     public void msg(String txt){
        JOptionPane.showMessageDialog(null, txt, "Eliminada",JOptionPane.INFORMATION_MESSAGE);
    }  
+    public void limpiar() {//Acción boton limpiar
+        txtNombre.setText("");
+        txtPrecio.setText("");
+        txtDescripcion.setText(""); 
+        txtFabricante.setText("");
+        txtPais.setText("");
+    }
    
 }

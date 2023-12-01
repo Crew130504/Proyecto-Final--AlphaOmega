@@ -104,6 +104,36 @@ public class ProductosDAO {
         }
         return listaProductos;
     }
+    public ArrayList<ProductoVO> listaDeProductosTipo(String miTipo) {
+        ArrayList<ProductoVO> listaProductos = new ArrayList<>();
+        String consulta = "SELECT * FROM producto WHERE `tipo`='"+miTipo+"'";
+        try {
+            // Obtiene una conexión a la base de datos
+            con = Conexion.getConexion();
+            // Crea una declaración SQL
+            st = (Statement) con.createStatement();
+            // Ejecuta la consulta
+            rs = st.executeQuery(consulta);
+
+            while (rs.next()) {
+                // Crea objetos ProductoVO y los agrega a la lista
+                listaProductos.add(comprobarTipo(miTipo, rs.getString("id"), rs.getString("nombre"),
+                        rs.getString("serie"), rs.getString("precio"), rs.getString("cantidad"),
+                        rs.getString("cantidadMin"), rs.getString("encargo"), rs.getString("imagen"),
+                        rs.getString("descripcion"), rs.getString("pais"), rs.getString("fabricante"),
+                        rs.getString("peso"), rs.getString("medidas"), rs.getString("garantia"),
+                        rs.getString("proveedor")));
+            }
+            // Cierra la declaración y desconecta de la base de datos
+            st.close();
+            Conexion.desconectar();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            // Manejo de excepciones en caso de error
+            vista.errorConsola("No se pudo");
+        }
+        return listaProductos;
+    }
     public void insertarDatos(ProductoVO producto) {
         try {
             // Obtiene una conexión a la base de datos

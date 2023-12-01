@@ -260,7 +260,7 @@ public class VistaClientes extends javax.swing.JFrame {
 //Imagen de fondo
 
    public void limpiar() {//Acción boton limpiar
-        txtFondo.setText("");
+        txtNombre.setText("");
         txtDireccion.setText("");
         txtTelefono.setText(""); 
         txtCorreo.setText("");

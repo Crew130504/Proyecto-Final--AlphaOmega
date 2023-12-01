@@ -244,5 +244,6 @@ public class VistaCarrito extends javax.swing.JFrame {
     public void msg(String txt){
        JOptionPane.showMessageDialog(null, txt, "Eliminada",JOptionPane.INFORMATION_MESSAGE);
    }  
+    
    
 }
