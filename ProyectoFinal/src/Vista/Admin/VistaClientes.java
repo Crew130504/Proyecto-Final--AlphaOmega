@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 import java.awt.Image;
 import java.awt.Graphics;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 public class VistaClientes extends javax.swing.JFrame {
 
@@ -11,8 +12,15 @@ public class VistaClientes extends javax.swing.JFrame {
     public VistaClientes() {
         
         initComponents();
+       setIconImage(getIconImage()); 
     }
+    
 
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Fondos/IconoVentana2.png"));
+        return retValue;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

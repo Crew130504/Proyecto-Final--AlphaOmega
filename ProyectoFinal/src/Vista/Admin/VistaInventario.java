@@ -4,6 +4,8 @@
  */
 package Vista.Admin;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,8 +19,15 @@ public class VistaInventario extends javax.swing.JFrame {
      */
     public VistaInventario() {
         initComponents();
+        setIconImage(getIconImage()); 
     }
+    
 
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Fondos/IconoVentana2.png"));
+        return retValue;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

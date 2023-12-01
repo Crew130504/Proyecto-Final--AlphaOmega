@@ -14,7 +14,7 @@ public class Conexion {
         try {
             cn = DriverManager.getConnection(URLDB, usuario, contrasena);
         } catch (SQLException sqle) {
-            System.out.println("No existe bobo");
+            sqle.printStackTrace();
         }
         return cn;
     }

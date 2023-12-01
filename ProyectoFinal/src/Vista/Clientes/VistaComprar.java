@@ -203,6 +203,9 @@ public class VistaComprar extends javax.swing.JFrame {
         btnCarrito.setForeground(new java.awt.Color(255, 255, 255));
         btnCarrito.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Fondos/iconoCarrito.png"))); // NOI18N
         btnCarrito.setBorder(null);
+        btnCarrito.setBorderPainted(false);
+        btnCarrito.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnCarrito.setOpaque(true);
         btnCarrito.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCarritoActionPerformed(evt);

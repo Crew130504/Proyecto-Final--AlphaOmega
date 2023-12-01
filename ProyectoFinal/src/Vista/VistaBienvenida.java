@@ -4,6 +4,8 @@
  */
 package Vista;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,8 +20,15 @@ public class VistaBienvenida extends javax.swing.JFrame {
     public VistaBienvenida() {
         
         initComponents();
+        setIconImage(getIconImage()); 
     }
+    
 
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Fondos/IconoVentana2.png"));
+        return retValue;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,9 +41,10 @@ public class VistaBienvenida extends javax.swing.JFrame {
         btnAdmin = new javax.swing.JButton();
         btnUsuario = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        txtFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnAdmin.setText("ADMIN");
@@ -43,17 +53,19 @@ public class VistaBienvenida extends javax.swing.JFrame {
                 btnAdminActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 310, -1, -1));
+        getContentPane().add(btnAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, -1, -1));
 
         btnUsuario.setText("USER");
-        getContentPane().add(btnUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 310, -1, -1));
+        getContentPane().add(btnUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 260, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 3, 24)); // NOI18N
         jLabel3.setText("Seleccione su Rol");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 270, 200, 40));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 200, 40));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Fondos/Icono.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-190, -200, 850, 730));
+        txtFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Fondos/Icono3.jpg"))); // NOI18N
+        txtFondo.setOpaque(true);
+        txtFondo.setPreferredSize(new java.awt.Dimension(500, 500));
+        getContentPane().add(txtFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-350, -20, 850, 520));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -66,8 +78,8 @@ public class VistaBienvenida extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnAdmin;
     public javax.swing.JButton btnUsuario;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel txtFondo;
     // End of variables declaration//GEN-END:variables
    public void error(String txt){
        JOptionPane.showMessageDialog(null, txt, "Error",JOptionPane.ERROR_MESSAGE);
