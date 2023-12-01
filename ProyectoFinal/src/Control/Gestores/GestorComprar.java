@@ -2,8 +2,11 @@ package Control.Gestores;
 
 import Control.DAO.HistorialInventarioDAO;
 import Control.DAO.ProductosDAO;
+import Control.DAO.VentasDAO;
 import Modelo.Carrito;
 import Modelo.ProductoVO;
+import Modelo.VentaVO;
+import Vista.Clientes.VistaAutenticacion;
 import Vista.Clientes.VistaCarrito;
 import Vista.Clientes.VistaComprar;
 import java.awt.event.ActionEvent;
@@ -12,78 +15,82 @@ import java.util.ArrayList;
 
 public class GestorComprar implements ActionListener {
 
-    private VistaComprar vista;
-    private VistaCarrito vistaC;
+    private VistaComprar vistaComprar;
+    private VistaCarrito vistaCarrito;
+    private VistaAutenticacion vistaautenticar;
     private Gestor vuelta;
 //    private GestorAutenticacion autenticacion = new GestorAutenticacion();
     private ProductosDAO miProductoDAO = new ProductosDAO();
     private HistorialInventarioDAO miHistorialDAO = new HistorialInventarioDAO();
+    private VentasDAO miVentaDAO = new VentasDAO();
     private ArrayList<ProductoVO> listaProductos = new ArrayList<>();
+    private ArrayList<VentaVO> miventa = new ArrayList<>();
     private ArrayList<Carrito> listaCarrito = new ArrayList<>();
     private double subtotal = 0;
-    int cantidad = 0;
+    private int cantidad = 0;
 
     public GestorComprar() {
-        this.vista = new VistaComprar();
-        this.vistaC = new VistaCarrito();
-        this.vista.btnCarrito.addActionListener(this);
-        this.vista.btnAñadirCarrito.addActionListener(this);
-        this.vista.btnSeleccionarProducto.addActionListener(this);
-        this.vista.btnSeleccionarTipo.addActionListener(this);
-        this.vista.btnVolver.addActionListener(this);
-        this.vistaC.btnSeleccionar.addActionListener(this);
-        this.vistaC.btnComprar.addActionListener(this);
+        this.vistaComprar = new VistaComprar();
+        this.vistaCarrito = new VistaCarrito();
+        this.vistaComprar.btnCarrito.addActionListener(this);
+        this.vistaComprar.btnAñadirCarrito.addActionListener(this);
+        this.vistaComprar.btnSeleccionarProducto.addActionListener(this);
+        this.vistaComprar.btnSeleccionarTipo.addActionListener(this);
+        this.vistaComprar.btnVolver.addActionListener(this);
+        this.vistaCarrito.btnSeleccionar.addActionListener(this);
+        this.vistaCarrito.btnComprar.addActionListener(this);
+        this.vistaCarrito.btnVolver.addActionListener(this);
     }
 
     public void iniciar() {
         //Llenar el combo de Tipos
         llenarComboTipo();
-        vista.comboxProductosTipo.addItem("Seleccionar");
+        vistaComprar.comboxProductosTipo.addItem("Seleccionar");
         // Centra la vistaBienvenida en el centro de la pantalla
-        this.vista.setLocationRelativeTo(null);
-        this.vista.setResizable(false);
+        this.vistaComprar.setLocationRelativeTo(null);
+        this.vistaComprar.setResizable(false);
         // Hace visible la vistaBienvenida
-        this.vista.setVisible(true);
+        this.vistaComprar.setVisible(true);
     }
 
     public void iniciar(Gestor vuelta) {
         //Llenar en combo de Tipos
         llenarComboTipo();
-        vista.comboxProductosTipo.addItem("Seleccionar");
+        vistaComprar.comboxProductosTipo.addItem("Seleccionar");
         //Insercion de logica de las funciones necesaria
         this.vuelta = vuelta;
         // Centra la vistaBienvenida en el centro de la pantalla
-        this.vista.setLocationRelativeTo(null);
+        this.vistaComprar.setLocationRelativeTo(null);
 
-        this.vista.setResizable(false);
+        this.vistaComprar.setResizable(false);
         // Hace visible la vistaBienvenida
-        this.vista.setVisible(true);
+        this.vistaComprar.setVisible(true);
     }
 
-    public void iniciarC() {
+    public void iniciarCarrito() {
         // Centra la vistaBienvenida en el centro de la pantalla
-        this.vistaC.setLocationRelativeTo(null);
-        this.vistaC.setResizable(false);
+        this.vistaCarrito.setLocationRelativeTo(null);
+        this.vistaCarrito.setResizable(false);
         // Hace visible la vistaBienvenida
-        this.vistaC.setVisible(true);
+        this.vistaCarrito.setVisible(true);
     }
 
     public void llenarComboTipo() {
 
-        vista.comboxTipo.addItem("Seleccion Tipo");
-        vista.comboxTipo.addItem("Discos Duros");
-        vista.comboxTipo.addItem("Lectores de Tarjeta");
-        vista.comboxTipo.addItem("Memorias RAM");
-        vista.comboxTipo.addItem("Monitores");
-        vista.comboxTipo.addItem("Mouses");
-        vista.comboxTipo.addItem("Tarjetas de Sonido");
-        vista.comboxTipo.addItem("Tarjetas de Video");
-        vista.comboxTipo.addItem("Teclados");
+        vistaComprar.comboxTipo.addItem("Seleccion Tipo");
+        vistaComprar.comboxTipo.addItem("Discos Duros");
+        vistaComprar.comboxTipo.addItem("Lectores de Tarjeta");
+        vistaComprar.comboxTipo.addItem("Memorias RAM");
+        vistaComprar.comboxTipo.addItem("Monitores");
+        vistaComprar.comboxTipo.addItem("Mouses");
+        vistaComprar.comboxTipo.addItem("Tarjetas de Sonido");
+        vistaComprar.comboxTipo.addItem("Tarjetas de Video");
+        vistaComprar.comboxTipo.addItem("Teclados");
     }
 
     public void llenarComboProductos(String nombre) {
         if (nombre.equals("Seleccion Tipo")) {
-            this.vista.error("SELECCIONE UN TIPO");
+            this.vistaComprar.error("SELECCIONE UN TIPO");
         } else {
             switch (nombre) {
                 case "Discos Duros" -> {
@@ -121,20 +128,20 @@ public class GestorComprar implements ActionListener {
                 default -> {
                 }
             }
-            this.vista.comboxProductosTipo.removeAllItems(); // Limpia los elementos existentes en el ComboBox
+            this.vistaComprar.comboxProductosTipo.removeAllItems(); // Limpia los elementos existentes en el ComboBox
 
             // Agregar la opción nula o predeterminada al principio del ComboBox
-            vista.comboxProductosTipo.addItem("Seleccionar");
+            vistaComprar.comboxProductosTipo.addItem("Seleccionar");
             for (int i = 0; i < listaProductos.size(); i++) {
-                vista.comboxProductosTipo.addItem(listaProductos.get(i).getNombre());
+                vistaComprar.comboxProductosTipo.addItem(listaProductos.get(i).getNombre());
             }
         }
     }
 
     private boolean nombreExistenteEnComboBox(String nombre) {
-        int itemCount = this.vistaC.comboxCarrito.getItemCount();
+        int itemCount = this.vistaCarrito.comboxCarrito.getItemCount();
         for (int i = 0; i < itemCount; i++) {
-            if (nombre.equals(this.vistaC.comboxCarrito.getItemAt(i))) {
+            if (nombre.equals(this.vistaCarrito.comboxCarrito.getItemAt(i))) {
                 return true; // El nombre ya existe en el ComboBox
             }
         }
@@ -159,28 +166,28 @@ public class GestorComprar implements ActionListener {
             }
         }
         if (!nombreExistenteEnComboBox("SELECCIONAR")) {
-            this.vistaC.comboxCarrito.addItem("SELECCIONAR");
+            this.vistaCarrito.comboxCarrito.addItem("SELECCIONAR");
         }
 
         ProductoVO productoCarrito = this.miProductoDAO.consultarporNombre(id);
         if (!nombreExistenteEnComboBox(productoCarrito.getNombre()) && nombreExistenteEnComboBox("SELECCIONAR")) {
-            this.vistaC.comboxCarrito.addItem(productoCarrito.getNombre());
+            this.vistaCarrito.comboxCarrito.addItem(productoCarrito.getNombre());
         }
 
     }
 
     public void seleccionTipo() {
-        String nombre = (String) this.vista.comboxProductosTipo.getSelectedItem();
+        String nombre = (String) this.vistaComprar.comboxProductosTipo.getSelectedItem();
         if (nombre.equals("Seleccionar")) {
-            this.vista.limpiar();
+            this.vistaComprar.limpiar();
         }
         for (ProductoVO productoSelec : listaProductos) {
             if (productoSelec.getNombre().equals(nombre)) {
-                this.vista.txtNombre.setText(productoSelec.getNombre());
-                this.vista.txtPrecio.setText(String.valueOf(productoSelec.getPrecio()));
-                this.vista.txtFabricante.setText(productoSelec.getFabricante());
-                this.vista.txtPais.setText(productoSelec.getPais());
-                this.vista.txtDescripcion.setText(productoSelec.getDescripcion());
+                this.vistaComprar.txtNombre.setText(productoSelec.getNombre());
+                this.vistaComprar.txtPrecio.setText(String.valueOf(productoSelec.getPrecio()));
+                this.vistaComprar.txtFabricante.setText(productoSelec.getFabricante());
+                this.vistaComprar.txtPais.setText(productoSelec.getPais());
+                this.vistaComprar.txtDescripcion.setText(productoSelec.getDescripcion());
                 break;  // Se detiene después de encontrar la primera coincidencia
             }
         }
@@ -188,46 +195,52 @@ public class GestorComprar implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == this.vista.btnVolver) {
-            this.vista.setVisible(false);
+        if (e.getSource() == this.vistaComprar.btnVolver) {
+            this.vistaComprar.setVisible(false);
             this.vuelta.iniciar();
         }
-        if (e.getSource() == this.vista.btnCarrito) {
+        if (e.getSource() == this.vistaCarrito.btnVolver) {
+            this.vistaCarrito.setVisible(false);
+            this.vistaComprar.setVisible(true);
+        }
+        
+        if (e.getSource() == this.vistaComprar.btnCarrito) {
             this.listaProductos = miProductoDAO.listaDeProductos();
-            String nombre = this.vista.txtBuscar.getText();
+            String nombre = this.vistaComprar.txtBuscar.getText();
             for (ProductoVO productoSelec : listaProductos) {
                 if (productoSelec.getNombre().equals(nombre)) {
-                    this.vista.txtNombre.setText(productoSelec.getNombre());
-                    this.vista.txtPrecio.setText(String.valueOf(productoSelec.getPrecio()));
-                    this.vista.txtFabricante.setText(productoSelec.getFabricante());
-                    this.vista.txtPais.setText(productoSelec.getPais());
-                    this.vista.txtDescripcion.setText(productoSelec.getDescripcion());
+                    this.vistaComprar.txtNombre.setText(productoSelec.getNombre());
+                    this.vistaComprar.txtPrecio.setText(String.valueOf(productoSelec.getPrecio()));
+                    this.vistaComprar.txtFabricante.setText(productoSelec.getFabricante());
+                    this.vistaComprar.txtPais.setText(productoSelec.getPais());
+                    this.vistaComprar.txtDescripcion.setText(productoSelec.getDescripcion());
                     break;  // Se detiene después de encontrar la primera coincidencia
                 }
             }
         }
-        if (e.getSource() == this.vista.btnSeleccionarTipo) {
-            String nombre = (String) this.vista.comboxTipo.getSelectedItem();
+        
+        if (e.getSource() == this.vistaComprar.btnSeleccionarTipo) {
+            String nombre = (String) this.vistaComprar.comboxTipo.getSelectedItem();
             llenarComboProductos(nombre);
         }
-        if (e.getSource() == this.vista.btnSeleccionarProducto) {
+        if (e.getSource() == this.vistaComprar.btnSeleccionarProducto) {
             seleccionTipo();
         }
-        if (e.getSource() == this.vista.btnAñadirCarrito) {
+        if (e.getSource() == this.vistaComprar.btnAñadirCarrito) {
             int menu;
             boolean comprobacion, ciclo = false;
             seleccionTipo();
-            cantidad += (int) this.vista.spnCantidad.getValue();
+            cantidad += (int) this.vistaComprar.spnCantidad.getValue();
             if (cantidad > 0) {
-                String nombre = this.vista.txtNombre.getText();
+                String nombre = this.vistaComprar.txtNombre.getText();
                 for (ProductoVO productoSelec : listaProductos) {
                     if (productoSelec.getNombre().equals(nombre)) {
                         if ((cantidad > productoSelec.getStock()) && ("NO".equals(productoSelec.getEncargo()) || "No".equals(productoSelec.getEncargo()))) {
-                            this.vista.error("Sin Tanto Stock");
+                            this.vistaComprar.error("Sin Tanto Stock");
                         } else if (productoSelec.getEncargo().equals("Si") || productoSelec.getEncargo().equals("SI")) {
                             do {
                                 try {
-                                    menu = Integer.parseInt(this.vista.capturar(
+                                    menu = Integer.parseInt(this.vistaComprar.capturar(
                                             "ESTE PRODUCTO ES POR ENCARGO\n SU COMPRA SERA MARCADA COMO PENDIENTE\nHASTA QUE LLEGUE SU PEDIDO DE NUESTRO PROVEEDORS\n1) ACEPTO\n2) RECHAZO"));
                                     switch (menu) {
                                         case 1 -> {
@@ -242,28 +255,28 @@ public class GestorComprar implements ActionListener {
                                         }
                                         // Puedes agregar aquí el código correspondiente para el caso de rechazo
                                         default -> {
-                                            this.vista.error("DIGITE UNA OPCION VALIDA");
+                                            this.vistaComprar.error("DIGITE UNA OPCION VALIDA");
                                             ciclo = false;
                                             comprobacion = false; // Asegura que comprobacion se mantenga en falso si la opción no es válida.
                                         }
                                     }
                                 } catch (NumberFormatException ex) {
-                                    this.vista.error("Por favor, ingrese un número válido.");
+                                    this.vistaComprar.error("Por favor, ingrese un número válido.");
                                     comprobacion = false; // Asegura que comprobacion se mantenga en falso si hay una excepción.
                                 }
                             } while (!ciclo);
                             if (comprobacion) {
-                                this.vistaC.spnCantidad.setText(String.valueOf(cantidad));
-                                llenarCarrito(nombre, Integer.parseInt(this.vistaC.spnCantidad.getText()));
+                                this.vistaCarrito.spnCantidad.setText(String.valueOf(cantidad));
+                                llenarCarrito(nombre, Integer.parseInt(this.vistaCarrito.spnCantidad.getText()));
                             }
                         } else {
-                            this.vistaC.spnCantidad.setText(String.valueOf(cantidad));
-                            llenarCarrito(nombre, Integer.parseInt(this.vistaC.spnCantidad.getText()));
+                            this.vistaCarrito.spnCantidad.setText(String.valueOf(cantidad));
+                            llenarCarrito(nombre, Integer.parseInt(this.vistaCarrito.spnCantidad.getText()));
                         }
                     }
                 }
             } else {
-                this.vista.error("SELECCIONE UNA CANTIDAD");
+                this.vistaComprar.error("SELECCIONE UNA CANTIDAD");
             }
             for (Carrito productorr : listaCarrito) {
                 for (ProductoVO productoSelec : listaProductos) {
@@ -273,25 +286,25 @@ public class GestorComprar implements ActionListener {
                     }
                 }
             }
-            this.vistaC.txtSubTotal.setText(String.valueOf(subtotal));
-            this.vistaC.txtTotal.setText(String.valueOf((0.19 * subtotal)));
+            this.vistaCarrito.txtSubTotal.setText(String.valueOf(subtotal));
+            this.vistaCarrito.txtTotal.setText(String.valueOf((0.19 * subtotal)));
         }
-        if (e.getSource() == this.vista.btnCarrito) {
-            this.vista.setVisible(false);
-            iniciarC();
+        if (e.getSource() == this.vistaComprar.btnCarrito) {
+            this.vistaComprar.setVisible(false);
+            iniciarCarrito();
         }
-        if (e.getSource() == this.vistaC.btnSeleccionar) {
-            String nombre = (String) this.vistaC.comboxCarrito.getSelectedItem();
+        if (e.getSource() == this.vistaCarrito.btnSeleccionar) {
+            String nombre = (String) this.vistaCarrito.comboxCarrito.getSelectedItem();
             if ("SELECCIONAR".equals(nombre)) {
-                this.vistaC.msg("SELECCIONE UN PRODUCTO PARA REVISAR");
+                this.vistaCarrito.msg("SELECCIONE UN PRODUCTO PARA REVISAR");
             } else {
                 for (Carrito producto : listaCarrito) {
                     if (producto.getNombre().equals(nombre)) {
                         for (ProductoVO productoSelec : listaProductos) {
                             if (productoSelec.getNombre().equals(producto.getNombre())) {
-                                this.vistaC.txtNombre.setText(productoSelec.getNombre());
-                                this.vistaC.txtPrecio.setText(String.valueOf(productoSelec.getPrecio()));
-                                this.vistaC.spnCantidad.setText(String.valueOf(producto.getCantidad()));
+                                this.vistaCarrito.txtNombre.setText(productoSelec.getNombre());
+                                this.vistaCarrito.txtPrecio.setText(String.valueOf(productoSelec.getPrecio()));
+                                this.vistaCarrito.spnCantidad.setText(String.valueOf(producto.getCantidad()));
                                 subtotal += (productoSelec.getPrecio() * producto.getCantidad());
                                 break;  // Se detiene después de encontrar la primera coincidencia
                             }
@@ -300,7 +313,7 @@ public class GestorComprar implements ActionListener {
                     }
                 }
             }
-            llenarCarrito(nombre, Integer.parseInt(this.vistaC.spnCantidad.getText()));
+            llenarCarrito(nombre, Integer.parseInt(this.vistaCarrito.spnCantidad.getText()));
             for (Carrito productorr : listaCarrito) {
                 for (ProductoVO productoSelec : listaProductos) {
                     if (productoSelec.getNombre().equals(productorr.getNombre())) {
@@ -309,19 +322,19 @@ public class GestorComprar implements ActionListener {
                     }
                 }
             }
-            this.vistaC.txtSubTotal.setText(String.valueOf(subtotal));
-            this.vistaC.txtTotal.setText(String.valueOf((0.19 * subtotal)));
+            this.vistaCarrito.txtSubTotal.setText(String.valueOf(subtotal));
+            this.vistaCarrito.txtTotal.setText(String.valueOf((0.19 * subtotal)));
         }
-        if (e.getSource() == this.vistaC.btnComprar) {
-            String nombre = (String) this.vistaC.comboxCarrito.getSelectedItem();
-            this.vistaC.setVisible(false);
+        if (e.getSource() == this.vistaCarrito.btnComprar) {
+            String nombre = (String) this.vistaCarrito.comboxCarrito.getSelectedItem();
+            this.vistaCarrito.setVisible(false);
             for (Carrito producto : listaCarrito) {
                 if (producto.getNombre().equals(nombre)) {
                     for (ProductoVO productoSelec : listaProductos) {
                         if (productoSelec.getNombre().equals(producto.getNombre())) {
-                            this.vistaC.txtNombre.setText(productoSelec.getNombre());
-                            this.vistaC.txtPrecio.setText(String.valueOf(productoSelec.getPrecio()));
-                            this.vistaC.spnCantidad.setText(String.valueOf(producto.getCantidad()));
+                            this.vistaCarrito.txtNombre.setText(productoSelec.getNombre());
+                            this.vistaCarrito.txtPrecio.setText(String.valueOf(productoSelec.getPrecio()));
+                            this.vistaCarrito.spnCantidad.setText(String.valueOf(producto.getCantidad()));
                             subtotal += (productoSelec.getPrecio() * producto.getCantidad());
                             break;  // Se detiene después de encontrar la primera coincidencia
                         }

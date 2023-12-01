@@ -53,9 +53,9 @@ public class VistaProveedores extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        comboxProveedores.setBackground(new java.awt.Color(255, 255, 204));
         comboxProveedores.setFont(new java.awt.Font("Segoe UI Semibold", 3, 14)); // NOI18N
         comboxProveedores.setForeground(new java.awt.Color(51, 51, 51));
+        comboxProveedores.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, new java.awt.Color(102, 102, 102)));
         comboxProveedores.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboxProveedoresItemStateChanged(evt);
@@ -68,10 +68,10 @@ public class VistaProveedores extends javax.swing.JFrame {
         });
         getContentPane().add(comboxProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 130, -1));
 
-        btnAgregar.setBackground(new java.awt.Color(255, 255, 204));
         btnAgregar.setFont(new java.awt.Font("Segoe UI Semilight", 3, 14)); // NOI18N
         btnAgregar.setForeground(new java.awt.Color(51, 51, 51));
         btnAgregar.setText("Agregar");
+        btnAgregar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, new java.awt.Color(102, 102, 102)));
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarActionPerformed(evt);
@@ -79,16 +79,16 @@ public class VistaProveedores extends javax.swing.JFrame {
         });
         getContentPane().add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 100, -1));
 
-        btnEliminar.setBackground(new java.awt.Color(255, 255, 204));
         btnEliminar.setFont(new java.awt.Font("Segoe UI Semilight", 3, 14)); // NOI18N
         btnEliminar.setForeground(new java.awt.Color(51, 51, 51));
         btnEliminar.setText("Eliminar");
+        btnEliminar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, new java.awt.Color(102, 102, 102)));
         getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 100, -1));
 
-        btnModificar.setBackground(new java.awt.Color(255, 255, 204));
         btnModificar.setFont(new java.awt.Font("Segoe UI Semilight", 3, 14)); // NOI18N
         btnModificar.setForeground(new java.awt.Color(51, 51, 51));
         btnModificar.setText("Modificar");
+        btnModificar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, new java.awt.Color(102, 102, 102)));
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModificarActionPerformed(evt);
@@ -96,10 +96,10 @@ public class VistaProveedores extends javax.swing.JFrame {
         });
         getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 100, -1));
 
-        btnSeleccionar.setBackground(new java.awt.Color(255, 255, 204));
         btnSeleccionar.setFont(new java.awt.Font("Segoe UI Semilight", 3, 14)); // NOI18N
         btnSeleccionar.setForeground(new java.awt.Color(51, 51, 51));
         btnSeleccionar.setText("Seleccionar");
+        btnSeleccionar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, new java.awt.Color(102, 102, 102)));
         btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSeleccionarActionPerformed(evt);
@@ -107,7 +107,6 @@ public class VistaProveedores extends javax.swing.JFrame {
         });
         getContentPane().add(btnSeleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
 
-        txtDireccion.setBackground(new java.awt.Color(255, 255, 204));
         txtDireccion.setFont(new java.awt.Font("Segoe UI Semibold", 2, 14)); // NOI18N
         txtDireccion.setForeground(new java.awt.Color(51, 51, 51));
         txtDireccion.addActionListener(new java.awt.event.ActionListener() {
@@ -117,26 +116,26 @@ public class VistaProveedores extends javax.swing.JFrame {
         });
         getContentPane().add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 150, 250, -1));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI Semibold", 3, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(51, 51, 51));
         jLabel4.setText("Telefono");
         jLabel4.setToolTipText("");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 210, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 3, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
         jLabel3.setText("Correo");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, -1, -1));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI Semibold", 3, 18)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(51, 51, 51));
         jLabel5.setText("Direccion");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, -1, -1));
 
-        btnVolver.setBackground(new java.awt.Color(255, 255, 204));
         btnVolver.setFont(new java.awt.Font("Segoe UI Semilight", 3, 14)); // NOI18N
         btnVolver.setForeground(new java.awt.Color(51, 51, 51));
-        btnVolver.setText("<--");
+        btnVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Fondos/volver.png"))); // NOI18N
+        btnVolver.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, new java.awt.Color(102, 102, 102)));
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVolverActionPerformed(evt);
@@ -144,7 +143,6 @@ public class VistaProveedores extends javax.swing.JFrame {
         });
         getContentPane().add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 60, 20));
 
-        txtCorreo.setBackground(new java.awt.Color(255, 255, 204));
         txtCorreo.setFont(new java.awt.Font("Segoe UI Semibold", 2, 14)); // NOI18N
         txtCorreo.setForeground(new java.awt.Color(51, 51, 51));
         txtCorreo.addActionListener(new java.awt.event.ActionListener() {
@@ -154,7 +152,6 @@ public class VistaProveedores extends javax.swing.JFrame {
         });
         getContentPane().add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 260, 250, -1));
 
-        txtTelefono.setBackground(new java.awt.Color(255, 255, 204));
         txtTelefono.setFont(new java.awt.Font("Segoe UI Semibold", 3, 14)); // NOI18N
         txtTelefono.setForeground(new java.awt.Color(51, 51, 51));
         txtTelefono.addActionListener(new java.awt.event.ActionListener() {
@@ -164,10 +161,10 @@ public class VistaProveedores extends javax.swing.JFrame {
         });
         getContentPane().add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 210, 250, -1));
 
-        btnLimpiar.setBackground(new java.awt.Color(255, 255, 204));
         btnLimpiar.setFont(new java.awt.Font("Segoe UI Semilight", 3, 14)); // NOI18N
         btnLimpiar.setForeground(new java.awt.Color(51, 51, 51));
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, new java.awt.Color(102, 102, 102)));
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiarActionPerformed(evt);
@@ -175,7 +172,6 @@ public class VistaProveedores extends javax.swing.JFrame {
         });
         getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 320, 400, -1));
 
-        txtNombre.setBackground(new java.awt.Color(255, 255, 204));
         txtNombre.setFont(new java.awt.Font("Segoe UI Semibold", 2, 14)); // NOI18N
         txtNombre.setForeground(new java.awt.Color(51, 51, 51));
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
@@ -185,17 +181,16 @@ public class VistaProveedores extends javax.swing.JFrame {
         });
         getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 100, 250, -1));
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI Semibold", 3, 18)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(51, 51, 51));
         jLabel6.setText("Nombre");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 3, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 3, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 51, 51));
         jLabel1.setText("PROVEEDORES");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, -1, -1));
 
-        txtId.setBackground(new java.awt.Color(255, 255, 204));
         txtId.setFont(new java.awt.Font("Segoe UI Semibold", 2, 14)); // NOI18N
         txtId.setForeground(new java.awt.Color(51, 51, 51));
         txtId.addActionListener(new java.awt.event.ActionListener() {
@@ -205,7 +200,7 @@ public class VistaProveedores extends javax.swing.JFrame {
         });
         getContentPane().add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 50, 250, -1));
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI Semibold", 3, 18)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(51, 51, 51));
         jLabel7.setText("ID");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, 20, -1));

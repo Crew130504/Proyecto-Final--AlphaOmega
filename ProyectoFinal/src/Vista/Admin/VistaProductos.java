@@ -163,7 +163,8 @@ public class VistaProductos extends javax.swing.JFrame {
 
         btnVolver.setFont(new java.awt.Font("Segoe UI Semilight", 3, 14)); // NOI18N
         btnVolver.setForeground(new java.awt.Color(51, 51, 51));
-        btnVolver.setText("<--");
+        btnVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Fondos/volver.png"))); // NOI18N
+        btnVolver.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, new java.awt.Color(102, 102, 102)));
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVolverActionPerformed(evt);

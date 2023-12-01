@@ -12,14 +12,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
-public class ComprarDAO {
+public class VentasDAO {
 
     private Connection con;
     private Statement st;
     private ResultSet rs;
     private VistaMenu vista = new VistaMenu();
 
-    public ComprarDAO() {
+    public VentasDAO() {
         // Inicializa las variables de conexión y resultados a null
         this.con = null;
         this.st = null;

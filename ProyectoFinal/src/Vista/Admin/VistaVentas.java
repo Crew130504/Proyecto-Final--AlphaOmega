@@ -59,65 +59,68 @@ public class VistaVentas extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnComprobar.setBackground(new java.awt.Color(255, 255, 204));
-        btnComprobar.setFont(new java.awt.Font("Segoe UI Semilight", 3, 14)); // NOI18N
+        btnComprobar.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         btnComprobar.setForeground(new java.awt.Color(51, 51, 51));
         btnComprobar.setText("Comprobar");
+        btnComprobar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, new java.awt.Color(102, 102, 102)));
         btnComprobar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnComprobarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnComprobar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 490, 100, -1));
+        getContentPane().add(btnComprobar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 490, 130, -1));
 
-        btnHistorial.setBackground(new java.awt.Color(255, 255, 204));
-        btnHistorial.setFont(new java.awt.Font("Segoe UI Semilight", 3, 14)); // NOI18N
+        btnHistorial.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         btnHistorial.setForeground(new java.awt.Color(51, 51, 51));
         btnHistorial.setText("Historial");
-        getContentPane().add(btnHistorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 590, 100, -1));
+        btnHistorial.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, new java.awt.Color(102, 102, 102)));
+        getContentPane().add(btnHistorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 590, 130, -1));
 
-        btnBuscar.setBackground(new java.awt.Color(255, 255, 204));
-        btnBuscar.setFont(new java.awt.Font("Segoe UI Semilight", 3, 14)); // NOI18N
+        btnBuscar.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         btnBuscar.setForeground(new java.awt.Color(51, 51, 51));
         btnBuscar.setText("Buscar");
+        btnBuscar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, new java.awt.Color(102, 102, 102)));
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 120, -1));
+        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 150, -1));
 
         txtFecha.setEditable(false);
-        txtFecha.setBackground(new java.awt.Color(255, 255, 204));
-        txtFecha.setFont(new java.awt.Font("Segoe UI Semibold", 2, 14)); // NOI18N
+        txtFecha.setBackground(new java.awt.Color(255, 255, 255));
+        txtFecha.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         txtFecha.setForeground(new java.awt.Color(51, 51, 51));
         txtFecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtFechaActionPerformed(evt);
             }
         });
-        getContentPane().add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 120, 250, -1));
+        getContentPane().add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 120, 280, -1));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI Semibold", 3, 18)); // NOI18N
+        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(51, 51, 51));
         jLabel4.setText("Hora (HH-MM-SS)");
         jLabel4.setToolTipText("");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 3, 18)); // NOI18N
+        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
         jLabel3.setText("Folio");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 230, -1, -1));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI Semibold", 3, 18)); // NOI18N
+        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(51, 51, 51));
         jLabel5.setText("Fecha (YYYY-MM-DD)");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 180, -1));
 
-        btnVolver.setBackground(new java.awt.Color(255, 255, 204));
         btnVolver.setFont(new java.awt.Font("Segoe UI Semilight", 3, 14)); // NOI18N
         btnVolver.setForeground(new java.awt.Color(51, 51, 51));
-        btnVolver.setText("<--");
+        btnVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Fondos/volver.png"))); // NOI18N
+        btnVolver.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, new java.awt.Color(102, 102, 102)));
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVolverActionPerformed(evt);
@@ -126,39 +129,38 @@ public class VistaVentas extends javax.swing.JFrame {
         getContentPane().add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 60, 20));
 
         txtFolio.setEditable(false);
-        txtFolio.setBackground(new java.awt.Color(255, 255, 204));
-        txtFolio.setFont(new java.awt.Font("Segoe UI Semibold", 2, 14)); // NOI18N
+        txtFolio.setBackground(new java.awt.Color(255, 255, 255));
+        txtFolio.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         txtFolio.setForeground(new java.awt.Color(51, 51, 51));
         txtFolio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtFolioActionPerformed(evt);
             }
         });
-        getContentPane().add(txtFolio, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 230, 250, -1));
+        getContentPane().add(txtFolio, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 230, 280, -1));
 
         txtHora.setEditable(false);
-        txtHora.setBackground(new java.awt.Color(255, 255, 204));
-        txtHora.setFont(new java.awt.Font("Segoe UI Semibold", 3, 14)); // NOI18N
+        txtHora.setBackground(new java.awt.Color(255, 255, 255));
+        txtHora.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         txtHora.setForeground(new java.awt.Color(51, 51, 51));
         txtHora.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtHoraActionPerformed(evt);
             }
         });
-        getContentPane().add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 180, 250, -1));
+        getContentPane().add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 180, 280, -1));
 
-        btnLimpiar.setBackground(new java.awt.Color(255, 255, 204));
-        btnLimpiar.setFont(new java.awt.Font("Segoe UI Semilight", 3, 14)); // NOI18N
+        btnLimpiar.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         btnLimpiar.setForeground(new java.awt.Color(51, 51, 51));
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, new java.awt.Color(102, 102, 102)));
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 590, 490, -1));
+        getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 590, 520, -1));
 
-        txtBusquedaFolio.setBackground(new java.awt.Color(255, 255, 204));
         txtBusquedaFolio.setFont(new java.awt.Font("Segoe UI Semibold", 2, 14)); // NOI18N
         txtBusquedaFolio.setForeground(new java.awt.Color(51, 51, 51));
         txtBusquedaFolio.addActionListener(new java.awt.event.ActionListener() {
@@ -166,104 +168,114 @@ public class VistaVentas extends javax.swing.JFrame {
                 txtBusquedaFolioActionPerformed(evt);
             }
         });
-        getContentPane().add(txtBusquedaFolio, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 120, -1));
+        getContentPane().add(txtBusquedaFolio, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 150, -1));
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI Semibold", 3, 18)); // NOI18N
+        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel6.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(51, 51, 51));
         jLabel6.setText("Cliente");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 70, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 3, 18)); // NOI18N
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 3, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 51, 51));
         jLabel1.setText("VENTAS");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, -1, -1));
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI Semibold", 3, 18)); // NOI18N
+        jLabel7.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(51, 51, 51));
         jLabel7.setText("SubTotal");
         jLabel7.setToolTipText("");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 480, -1, -1));
 
         txtSubTotal.setEditable(false);
-        txtSubTotal.setBackground(new java.awt.Color(255, 255, 204));
-        txtSubTotal.setFont(new java.awt.Font("Segoe UI Semibold", 3, 14)); // NOI18N
+        txtSubTotal.setBackground(new java.awt.Color(255, 255, 255));
+        txtSubTotal.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         txtSubTotal.setForeground(new java.awt.Color(51, 51, 51));
         txtSubTotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSubTotalActionPerformed(evt);
             }
         });
-        getContentPane().add(txtSubTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 480, 250, -1));
+        getContentPane().add(txtSubTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 480, 280, -1));
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI Semibold", 3, 18)); // NOI18N
+        jLabel8.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel8.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(51, 51, 51));
         jLabel8.setText("Total");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 530, 50, -1));
 
         txtTotal.setEditable(false);
-        txtTotal.setBackground(new java.awt.Color(255, 255, 204));
-        txtTotal.setFont(new java.awt.Font("Segoe UI Semibold", 2, 14)); // NOI18N
+        txtTotal.setBackground(new java.awt.Color(255, 255, 255));
+        txtTotal.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         txtTotal.setForeground(new java.awt.Color(51, 51, 51));
         txtTotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTotalActionPerformed(evt);
             }
         });
-        getContentPane().add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 530, 250, -1));
+        getContentPane().add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 530, 280, -1));
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI Semibold", 3, 18)); // NOI18N
+        jLabel9.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel9.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(51, 51, 51));
         jLabel9.setText("Detalles");
         jLabel9.setToolTipText("");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 280, -1, -1));
 
         txtEstado.setEditable(false);
-        txtEstado.setBackground(new java.awt.Color(255, 255, 204));
-        txtEstado.setFont(new java.awt.Font("Segoe UI Semibold", 3, 14)); // NOI18N
+        txtEstado.setBackground(new java.awt.Color(255, 255, 255));
+        txtEstado.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         txtEstado.setForeground(new java.awt.Color(51, 51, 51));
         txtEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEstadoActionPerformed(evt);
             }
         });
-        getContentPane().add(txtEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 440, 250, -1));
+        getContentPane().add(txtEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 440, 280, -1));
+
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
 
         txtDetalles.setEditable(false);
-        txtDetalles.setBackground(new java.awt.Color(255, 255, 204));
+        txtDetalles.setBackground(new java.awt.Color(255, 255, 255));
         txtDetalles.setColumns(20);
-        txtDetalles.setFont(new java.awt.Font("Segoe UI Semibold", 2, 12)); // NOI18N
+        txtDetalles.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         txtDetalles.setRows(5);
         jScrollPane1.setViewportView(txtDetalles);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 280, 250, 130));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 280, 280, 130));
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI Semibold", 3, 18)); // NOI18N
+        jLabel10.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel10.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(51, 51, 51));
         jLabel10.setText("Estado");
         jLabel10.setToolTipText("");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 440, -1, -1));
 
-        btnPendientes1.setBackground(new java.awt.Color(255, 255, 204));
-        btnPendientes1.setFont(new java.awt.Font("Segoe UI Semilight", 3, 14)); // NOI18N
+        btnPendientes1.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         btnPendientes1.setForeground(new java.awt.Color(51, 51, 51));
         btnPendientes1.setText("Pendientes");
+        btnPendientes1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, new java.awt.Color(102, 102, 102)));
         btnPendientes1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPendientes1ActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPendientes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 540, 100, -1));
+        getContentPane().add(btnPendientes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 540, 130, -1));
 
         txtNombre.setEditable(false);
-        txtNombre.setBackground(new java.awt.Color(255, 255, 204));
-        txtNombre.setFont(new java.awt.Font("Segoe UI Semibold", 2, 14)); // NOI18N
+        txtNombre.setBackground(new java.awt.Color(255, 255, 255));
+        txtNombre.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         txtNombre.setForeground(new java.awt.Color(51, 51, 51));
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreActionPerformed(evt);
             }
         });
-        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 70, 250, -1));
+        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 70, 280, -1));
+
+        txtFondo.setBackground(new java.awt.Color(255, 255, 255));
         getContentPane().add(txtFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 770, 650));
 
         pack();

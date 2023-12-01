@@ -4,9 +4,12 @@
  */
 package Vista;
 
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.UIManager;
 
 /**
  *
@@ -47,20 +50,24 @@ public class VistaBienvenida extends javax.swing.JFrame {
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btnAdmin.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         btnAdmin.setText("ADMIN");
+        btnAdmin.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, new java.awt.Color(102, 102, 102)));
         btnAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAdminActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, -1, -1));
+        getContentPane().add(btnAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 100, -1));
 
+        btnUsuario.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         btnUsuario.setText("USER");
-        getContentPane().add(btnUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 260, -1, -1));
+        btnUsuario.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, new java.awt.Color(102, 102, 102)));
+        getContentPane().add(btnUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 270, 100, -1));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 3, 24)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 3, 36)); // NOI18N
         jLabel3.setText("Seleccione su Rol");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 200, 40));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 270, 40));
 
         txtFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Fondos/Icono3.jpg"))); // NOI18N
         txtFondo.setOpaque(true);
@@ -91,7 +98,23 @@ public class VistaBienvenida extends javax.swing.JFrame {
     public void msg(String txt){
        JOptionPane.showMessageDialog(null, txt, "Eliminada",JOptionPane.INFORMATION_MESSAGE);
    }  
-    public String capturar(String txt){
-        return (JOptionPane.showInputDialog(txt));
+    public String capturar(String txt) {
+        // Crear un campo de contraseña para la entrada
+        JPasswordField campoContrasena = new JPasswordField();
+
+        // Mostrar ventana de entrada de contraseña
+        int opcion = JOptionPane.showConfirmDialog(null, campoContrasena, txt, JOptionPane.OK_CANCEL_OPTION, JOptionPane.OK_CANCEL_OPTION);
+
+        // Validar la entrada de la contraseña
+        if (opcion == JOptionPane.OK_OPTION) {
+            // Obtener la contraseña ingresada como un char array
+            char[] contrasenaCharArray = campoContrasena.getPassword();
+
+            // Convertir el char array a String (puedes realizar acciones adicionales aquí según tus necesidades)
+            return new String(contrasenaCharArray);
+        } else {
+            // El usuario canceló la entrada de la contraseña
+            return null;
+        }
     }
 }

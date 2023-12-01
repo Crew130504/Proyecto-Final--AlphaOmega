@@ -50,38 +50,49 @@ public class VistaMenu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 3, 24)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("MENU");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(183, 12, 95, -1));
 
+        btnVentas.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         btnVentas.setText("Ventas");
-        getContentPane().add(btnVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 155, -1, -1));
+        btnVentas.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, new java.awt.Color(102, 102, 102)));
+        getContentPane().add(btnVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 155, 70, -1));
 
-        btnVolver.setText("<");
+        btnVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Fondos/volver.png"))); // NOI18N
+        btnVolver.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, new java.awt.Color(102, 102, 102)));
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVolverActionPerformed(evt);
             }
         });
-        getContentPane().add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        getContentPane().add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 60, 20));
 
+        btnClientes.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         btnClientes.setText("Clientes");
-        getContentPane().add(btnClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 82, -1, -1));
+        btnClientes.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, new java.awt.Color(102, 102, 102)));
+        getContentPane().add(btnClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 82, 70, -1));
 
+        btnProveedores.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         btnProveedores.setText("Proveedores");
-        getContentPane().add(btnProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(327, 155, -1, -1));
+        btnProveedores.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, new java.awt.Color(102, 102, 102)));
+        getContentPane().add(btnProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(327, 155, 110, -1));
 
+        btnProductos.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         btnProductos.setText("Productos");
-        getContentPane().add(btnProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(183, 119, -1, -1));
+        btnProductos.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, new java.awt.Color(102, 102, 102)));
+        getContentPane().add(btnProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(183, 119, 90, -1));
 
+        btnInventario.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         btnInventario.setText("Inventario");
+        btnInventario.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, new java.awt.Color(102, 102, 102)));
         btnInventario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnInventarioActionPerformed(evt);
             }
         });
-        getContentPane().add(btnInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, -1, -1));
+        getContentPane().add(btnInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 90, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Fondos/Icono2.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-270, 0, 740, 300));

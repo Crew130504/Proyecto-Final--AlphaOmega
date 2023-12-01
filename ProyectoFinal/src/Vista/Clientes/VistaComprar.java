@@ -105,7 +105,8 @@ public class VistaComprar extends javax.swing.JFrame {
 
         btnVolver.setBackground(new java.awt.Color(153, 153, 153));
         btnVolver.setFont(new java.awt.Font("Segoe UI Semilight", 3, 18)); // NOI18N
-        btnVolver.setText("<-");
+        btnVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Fondos/volver.png"))); // NOI18N
+        btnVolver.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVolverActionPerformed(evt);
@@ -202,7 +203,7 @@ public class VistaComprar extends javax.swing.JFrame {
         btnCarrito.setFont(new java.awt.Font("Segoe UI Semilight", 1, 18)); // NOI18N
         btnCarrito.setForeground(new java.awt.Color(255, 255, 255));
         btnCarrito.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Fondos/iconoCarrito.png"))); // NOI18N
-        btnCarrito.setBorder(null);
+        btnCarrito.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, new java.awt.Color(102, 102, 102)));
         btnCarrito.setBorderPainted(false);
         btnCarrito.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCarrito.setOpaque(true);
