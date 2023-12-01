@@ -2,6 +2,7 @@ package Control.Gestores;
 
 import Control.DAO.HistorialInventarioDAO;
 import Control.DAO.ProductosDAO;
+import Modelo.Carrito;
 import Modelo.ProductoVO;
 import Vista.Clientes.VistaCarrito;
 import Vista.Clientes.VistaComprar;
@@ -15,11 +16,9 @@ public class GestorComprar implements ActionListener {
     private VistaCarrito vistaC;
     private Gestor vuelta;
     private ProductosDAO miProductoDAO = new ProductosDAO();
-    ;
     private HistorialInventarioDAO miHistorialDAO = new HistorialInventarioDAO();
-    ;
     private ArrayList<ProductoVO> listaProductos = new ArrayList<>();
-    private ArrayList<ProductoVO> listaCarrito = new ArrayList<>();
+    private ArrayList<Carrito> listaCarrito = new ArrayList<>();
 
     public GestorComprar() {
         this.vista = new VistaComprar();
@@ -30,6 +29,7 @@ public class GestorComprar implements ActionListener {
         this.vista.btnSeleccionarTipo.addActionListener(this);
         this.vista.btnVolver.addActionListener(this);
         this.vistaC.btnVolver.addActionListener(this);
+        this.vistaC.btnSeleccionar.addActionListener(this);
     }
 
     public void iniciar() {
@@ -127,8 +127,24 @@ public class GestorComprar implements ActionListener {
             }
         }
     }
-
-    public void llenarCarrito(String nombre) {
+    private boolean nombreExistenteEnComboBox(String nombre) {
+        int itemCount = this.vistaC.comboxCarrito.getItemCount();
+        for (int i = 0; i < itemCount; i++) {
+            if (nombre.equals(this.vistaC.comboxCarrito.getItemAt(i))) {
+                return true; // El nombre ya existe en el ComboBox
+            }
+        }
+        return false; // El nombre no existe en el ComboBox
+    }
+    public void llenarCarrito(String nombre, int cantidad) {
+        Carrito miProducto = new Carrito(nombre, cantidad);
+        listaCarrito.add(miProducto);            
+        for(Carrito producto:listaCarrito){
+            if(producto.getNombre().equals(nombre)){
+                producto.setCantidad(cantidad);
+                break;
+            }
+        }
         this.listaProductos = miProductoDAO.listaDeProductos();
         String id = null;
         for (ProductoVO productoSelec : listaProductos) {
@@ -137,9 +153,16 @@ public class GestorComprar implements ActionListener {
                 break;  // Se detiene después de encontrar la primera coincidencia
             }
         }
+        if(!nombreExistenteEnComboBox("SELECCIONAR")){
+            this.vistaC.comboxCarrito.addItem("SELECCIONAR");
+        }
+        
         ProductoVO productoCarrito = this.miProductoDAO.consultarporNombre(id);
-        this.vistaC.comboxCarrito.addItem("SELECCIONAR");
-        this.vistaC.comboxCarrito.addItem(productoCarrito.getNombre());
+        if(!nombreExistenteEnComboBox(productoCarrito.getNombre())&& nombreExistenteEnComboBox("SELECCIONAR")){
+            this.vistaC.comboxCarrito.addItem(productoCarrito.getNombre());
+        }
+        
+        
     }
 
     public void seleccionTipo() {
@@ -226,8 +249,10 @@ public class GestorComprar implements ActionListener {
                                 }
                             } while (!ciclo);
                             if (comprobacion) {
-                                llenarCarrito(nombre);
+                                llenarCarrito(nombre, cantidad);
                             }
+                        } else {
+                            llenarCarrito(nombre, cantidad);
                         }
                     }
                 }
@@ -241,8 +266,35 @@ public class GestorComprar implements ActionListener {
         }
         if (e.getSource() == this.vistaC.btnVolver) {
             this.vistaC.setVisible(false);
+            this.vistaC.limpiar();
             iniciar();
         }
+        if (e.getSource() == this.vistaC.btnSeleccionar) {
+            double total = 0;
+            double subtotal = 0;
+            String nombre = (String) this.vistaC.comboxCarrito.getSelectedItem();
+            if ("SELECCIONAR".equals(nombre)) {
+                this.vistaC.msg("SELECCIONE UN PRODUCTO PARA REVISAR");
+            } else {
+                for (Carrito producto : listaCarrito) {
+                    if (producto.getNombre().equals(nombre)) {
+                        for (ProductoVO productoSelec : listaProductos) {
+                            if (productoSelec.getNombre().equals(producto.getNombre())) {
+                                this.vistaC.txtNombre.setText(productoSelec.getNombre());
+                                this.vistaC.txtPrecio.setText(String.valueOf(productoSelec.getPrecio()));
+                                this.vistaC.spnCantidad.setText(String.valueOf(producto.getCantidad()));
+                                subtotal+=(productoSelec.getPrecio()*producto.getCantidad());
+                                break;  // Se detiene después de encontrar la primera coincidencia
+                            }
+                        }
+                        break;  // Se detiene después de encontrar la primera coincidencia
+                    }
+                }
+            }
+            this.vistaC.txtSubTotal.setText(String.valueOf(subtotal));
+            this.vistaC.txtTotal.setText(String.valueOf((0.19*subtotal)));
+        }
+
     }
 
 }

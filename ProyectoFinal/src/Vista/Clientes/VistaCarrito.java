@@ -4,13 +4,19 @@ import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 import java.awt.Image;
 import java.awt.Graphics;
+import javax.swing.JComponent;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 public class VistaCarrito extends javax.swing.JFrame {
 
     
     public VistaCarrito() {
         
         initComponents();
+        setIconImage(getIconImage());
+        
     }
 
     /**
@@ -23,7 +29,6 @@ public class VistaCarrito extends javax.swing.JFrame {
     private void initComponents() {
 
         comboxCarrito = new javax.swing.JComboBox<>();
-        btnEliminar = new javax.swing.JButton();
         txtPrecio = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -33,11 +38,11 @@ public class VistaCarrito extends javax.swing.JFrame {
         txtNombre = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        spnCantidad = new javax.swing.JSpinner();
         txtTotal = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         btnVolver = new javax.swing.JButton();
-        btnProducto = new javax.swing.JButton();
+        spnCantidad = new javax.swing.JTextField();
+        btnSeleccionar = new javax.swing.JButton();
         txtFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -56,13 +61,6 @@ public class VistaCarrito extends javax.swing.JFrame {
             }
         });
         getContentPane().add(comboxCarrito, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 130, -1));
-
-        btnEliminar.setBackground(new java.awt.Color(153, 153, 153));
-        btnEliminar.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
-        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
-        btnEliminar.setText("Eliminar");
-        btnEliminar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 100, -1));
 
         txtPrecio.setFont(new java.awt.Font("Segoe UI Semibold", 2, 14)); // NOI18N
         txtPrecio.setForeground(new java.awt.Color(51, 51, 51));
@@ -130,7 +128,6 @@ public class VistaCarrito extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(51, 51, 51));
         jLabel1.setText("CARRITO");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 80, -1));
-        getContentPane().add(spnCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, 250, -1));
 
         txtTotal.setEditable(false);
         txtTotal.setBackground(new java.awt.Color(255, 255, 255));
@@ -158,17 +155,28 @@ public class VistaCarrito extends javax.swing.JFrame {
         });
         getContentPane().add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 60, 20));
 
-        btnProducto.setBackground(new java.awt.Color(153, 153, 153));
-        btnProducto.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
-        btnProducto.setForeground(new java.awt.Color(255, 255, 255));
-        btnProducto.setText("Seleccionar");
-        btnProducto.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnProducto.addActionListener(new java.awt.event.ActionListener() {
+        spnCantidad.setEditable(false);
+        spnCantidad.setBackground(new java.awt.Color(255, 255, 255));
+        spnCantidad.setFont(new java.awt.Font("Segoe UI Semibold", 2, 14)); // NOI18N
+        spnCantidad.setForeground(new java.awt.Color(51, 51, 51));
+        spnCantidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProductoActionPerformed(evt);
+                spnCantidadActionPerformed(evt);
             }
         });
-        getContentPane().add(btnProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 100, -1));
+        getContentPane().add(spnCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, 250, -1));
+
+        btnSeleccionar.setBackground(new java.awt.Color(153, 153, 153));
+        btnSeleccionar.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
+        btnSeleccionar.setForeground(new java.awt.Color(255, 255, 255));
+        btnSeleccionar.setText("Seleccionar");
+        btnSeleccionar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeleccionarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSeleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 100, -1));
 
         txtFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Fondos/Icono3.jpg"))); // NOI18N
         txtFondo.setOpaque(true);
@@ -209,9 +217,13 @@ public class VistaCarrito extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnVolverActionPerformed
 
-    private void btnProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductoActionPerformed
+    private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnProductoActionPerformed
+    }//GEN-LAST:event_btnSeleccionarActionPerformed
+
+    private void spnCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_spnCantidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_spnCantidadActionPerformed
 
     /**
      * @param args the command line arguments
@@ -219,8 +231,7 @@ public class VistaCarrito extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnComprar;
-    public javax.swing.JButton btnEliminar;
-    public javax.swing.JButton btnProducto;
+    public javax.swing.JButton btnSeleccionar;
     public javax.swing.JButton btnVolver;
     public javax.swing.JComboBox<String> comboxCarrito;
     private javax.swing.JLabel jLabel1;
@@ -229,7 +240,7 @@ public class VistaCarrito extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JSpinner spnCantidad;
+    public javax.swing.JTextField spnCantidad;
     private javax.swing.JLabel txtFondo;
     public javax.swing.JTextField txtNombre;
     public javax.swing.JTextField txtPrecio;
@@ -247,6 +258,12 @@ public class VistaCarrito extends javax.swing.JFrame {
     public void msg(String txt){
        JOptionPane.showMessageDialog(null, txt, "Eliminada",JOptionPane.INFORMATION_MESSAGE);
    }  
-    
+    public void limpiar() {//Acción boton limpiar
+        txtNombre.setText("");
+        txtPrecio.setText("");
+        spnCantidad.setText("");
+        txtSubTotal.setText("");
+        txtTotal.setText("");
+    }
    
 }

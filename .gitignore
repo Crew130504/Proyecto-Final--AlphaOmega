@@ -1,0 +1,32 @@
+# Ignorar carpetas y archivos de construcción generados por IDEs
+build/
+dist/
+nbproject/build-impl.xml
+nbproject/private/
+nbproject/project.properties
+nbproject/project.xml
+nbproject/private/
+nbproject/private/
+nbproject/private/
+nbproject/private/
+nbproject/private/
+src/
+test/
+build.xml
+
+# NetBeans specific #
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+
+# Archivos compilados #
+*.class
+
+# Archivos de paquete #
+*.jar
+*.war
+*.ear
