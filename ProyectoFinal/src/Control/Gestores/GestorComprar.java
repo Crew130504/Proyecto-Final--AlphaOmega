@@ -15,10 +15,13 @@ public class GestorComprar implements ActionListener {
     private VistaComprar vista;
     private VistaCarrito vistaC;
     private Gestor vuelta;
+//    private GestorAutenticacion autenticacion = new GestorAutenticacion();
     private ProductosDAO miProductoDAO = new ProductosDAO();
     private HistorialInventarioDAO miHistorialDAO = new HistorialInventarioDAO();
     private ArrayList<ProductoVO> listaProductos = new ArrayList<>();
     private ArrayList<Carrito> listaCarrito = new ArrayList<>();
+    private double subtotal = 0;
+    int cantidad = 0;
 
     public GestorComprar() {
         this.vista = new VistaComprar();
@@ -28,8 +31,8 @@ public class GestorComprar implements ActionListener {
         this.vista.btnSeleccionarProducto.addActionListener(this);
         this.vista.btnSeleccionarTipo.addActionListener(this);
         this.vista.btnVolver.addActionListener(this);
-        this.vistaC.btnVolver.addActionListener(this);
         this.vistaC.btnSeleccionar.addActionListener(this);
+        this.vistaC.btnComprar.addActionListener(this);
     }
 
     public void iniciar() {
@@ -127,6 +130,7 @@ public class GestorComprar implements ActionListener {
             }
         }
     }
+
     private boolean nombreExistenteEnComboBox(String nombre) {
         int itemCount = this.vistaC.comboxCarrito.getItemCount();
         for (int i = 0; i < itemCount; i++) {
@@ -136,11 +140,12 @@ public class GestorComprar implements ActionListener {
         }
         return false; // El nombre no existe en el ComboBox
     }
+
     public void llenarCarrito(String nombre, int cantidad) {
         Carrito miProducto = new Carrito(nombre, cantidad);
-        listaCarrito.add(miProducto);            
-        for(Carrito producto:listaCarrito){
-            if(producto.getNombre().equals(nombre)){
+        listaCarrito.add(miProducto);
+        for (Carrito producto : listaCarrito) {
+            if (producto.getNombre().equals(nombre)) {
                 producto.setCantidad(cantidad);
                 break;
             }
@@ -153,16 +158,15 @@ public class GestorComprar implements ActionListener {
                 break;  // Se detiene después de encontrar la primera coincidencia
             }
         }
-        if(!nombreExistenteEnComboBox("SELECCIONAR")){
+        if (!nombreExistenteEnComboBox("SELECCIONAR")) {
             this.vistaC.comboxCarrito.addItem("SELECCIONAR");
         }
-        
+
         ProductoVO productoCarrito = this.miProductoDAO.consultarporNombre(id);
-        if(!nombreExistenteEnComboBox(productoCarrito.getNombre())&& nombreExistenteEnComboBox("SELECCIONAR")){
+        if (!nombreExistenteEnComboBox(productoCarrito.getNombre()) && nombreExistenteEnComboBox("SELECCIONAR")) {
             this.vistaC.comboxCarrito.addItem(productoCarrito.getNombre());
         }
-        
-        
+
     }
 
     public void seleccionTipo() {
@@ -213,7 +217,7 @@ public class GestorComprar implements ActionListener {
             int menu;
             boolean comprobacion, ciclo = false;
             seleccionTipo();
-            int cantidad = (int) this.vista.spnCantidad.getValue();
+            cantidad += (int) this.vista.spnCantidad.getValue();
             if (cantidad > 0) {
                 String nombre = this.vista.txtNombre.getText();
                 for (ProductoVO productoSelec : listaProductos) {
@@ -249,29 +253,34 @@ public class GestorComprar implements ActionListener {
                                 }
                             } while (!ciclo);
                             if (comprobacion) {
-                                llenarCarrito(nombre, cantidad);
+                                this.vistaC.spnCantidad.setText(String.valueOf(cantidad));
+                                llenarCarrito(nombre, Integer.parseInt(this.vistaC.spnCantidad.getText()));
                             }
                         } else {
-                            llenarCarrito(nombre, cantidad);
+                            this.vistaC.spnCantidad.setText(String.valueOf(cantidad));
+                            llenarCarrito(nombre, Integer.parseInt(this.vistaC.spnCantidad.getText()));
                         }
                     }
                 }
             } else {
                 this.vista.error("SELECCIONE UNA CANTIDAD");
             }
+            for (Carrito productorr : listaCarrito) {
+                for (ProductoVO productoSelec : listaProductos) {
+                    if (productoSelec.getNombre().equals(productorr.getNombre())) {
+                        subtotal += (productoSelec.getPrecio() * productorr.getCantidad());
+                        break;  // Se detiene después de encontrar la primera coincidencia
+                    }
+                }
+            }
+            this.vistaC.txtSubTotal.setText(String.valueOf(subtotal));
+            this.vistaC.txtTotal.setText(String.valueOf((0.19 * subtotal)));
         }
         if (e.getSource() == this.vista.btnCarrito) {
             this.vista.setVisible(false);
             iniciarC();
         }
-        if (e.getSource() == this.vistaC.btnVolver) {
-            this.vistaC.setVisible(false);
-            this.vistaC.limpiar();
-            iniciar();
-        }
         if (e.getSource() == this.vistaC.btnSeleccionar) {
-            double total = 0;
-            double subtotal = 0;
             String nombre = (String) this.vistaC.comboxCarrito.getSelectedItem();
             if ("SELECCIONAR".equals(nombre)) {
                 this.vistaC.msg("SELECCIONE UN PRODUCTO PARA REVISAR");
@@ -283,7 +292,7 @@ public class GestorComprar implements ActionListener {
                                 this.vistaC.txtNombre.setText(productoSelec.getNombre());
                                 this.vistaC.txtPrecio.setText(String.valueOf(productoSelec.getPrecio()));
                                 this.vistaC.spnCantidad.setText(String.valueOf(producto.getCantidad()));
-                                subtotal+=(productoSelec.getPrecio()*producto.getCantidad());
+                                subtotal += (productoSelec.getPrecio() * producto.getCantidad());
                                 break;  // Se detiene después de encontrar la primera coincidencia
                             }
                         }
@@ -291,8 +300,37 @@ public class GestorComprar implements ActionListener {
                     }
                 }
             }
+            llenarCarrito(nombre, Integer.parseInt(this.vistaC.spnCantidad.getText()));
+            for (Carrito productorr : listaCarrito) {
+                for (ProductoVO productoSelec : listaProductos) {
+                    if (productoSelec.getNombre().equals(productorr.getNombre())) {
+                        subtotal += (productoSelec.getPrecio() * productorr.getCantidad());
+                        break;  // Se detiene después de encontrar la primera coincidencia
+                    }
+                }
+            }
             this.vistaC.txtSubTotal.setText(String.valueOf(subtotal));
-            this.vistaC.txtTotal.setText(String.valueOf((0.19*subtotal)));
+            this.vistaC.txtTotal.setText(String.valueOf((0.19 * subtotal)));
+        }
+        if (e.getSource() == this.vistaC.btnComprar) {
+            String nombre = (String) this.vistaC.comboxCarrito.getSelectedItem();
+            this.vistaC.setVisible(false);
+            for (Carrito producto : listaCarrito) {
+                if (producto.getNombre().equals(nombre)) {
+                    for (ProductoVO productoSelec : listaProductos) {
+                        if (productoSelec.getNombre().equals(producto.getNombre())) {
+                            this.vistaC.txtNombre.setText(productoSelec.getNombre());
+                            this.vistaC.txtPrecio.setText(String.valueOf(productoSelec.getPrecio()));
+                            this.vistaC.spnCantidad.setText(String.valueOf(producto.getCantidad()));
+                            subtotal += (productoSelec.getPrecio() * producto.getCantidad());
+                            break;  // Se detiene después de encontrar la primera coincidencia
+                        }
+                    }
+                    break;  // Se detiene después de encontrar la primera coincidencia
+                }
+            }
+//            autenticacion.datosCompra(listaCarrito,listaProductos,cantidad);
+//            autenticacion.iniciar(this);
         }
 
     }

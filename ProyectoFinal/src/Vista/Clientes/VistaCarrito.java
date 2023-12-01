@@ -40,7 +40,6 @@ public class VistaCarrito extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         txtTotal = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        btnVolver = new javax.swing.JButton();
         spnCantidad = new javax.swing.JTextField();
         btnSeleccionar = new javax.swing.JButton();
         txtFondo = new javax.swing.JLabel();
@@ -145,17 +144,6 @@ public class VistaCarrito extends javax.swing.JFrame {
         jLabel7.setText("Total");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, -1, -1));
 
-        btnVolver.setBackground(new java.awt.Color(153, 153, 153));
-        btnVolver.setFont(new java.awt.Font("Segoe UI Semilight", 3, 18)); // NOI18N
-        btnVolver.setText("<-");
-        btnVolver.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVolverActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 60, 20));
-
-        spnCantidad.setEditable(false);
         spnCantidad.setBackground(new java.awt.Color(255, 255, 255));
         spnCantidad.setFont(new java.awt.Font("Segoe UI Semibold", 2, 14)); // NOI18N
         spnCantidad.setForeground(new java.awt.Color(51, 51, 51));
@@ -213,10 +201,6 @@ public class VistaCarrito extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTotalActionPerformed
 
-    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-
-    }//GEN-LAST:event_btnVolverActionPerformed
-
     private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSeleccionarActionPerformed
@@ -232,7 +216,6 @@ public class VistaCarrito extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnComprar;
     public javax.swing.JButton btnSeleccionar;
-    public javax.swing.JButton btnVolver;
     public javax.swing.JComboBox<String> comboxCarrito;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
