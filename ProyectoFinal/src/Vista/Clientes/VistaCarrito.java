@@ -129,7 +129,7 @@ public class VistaCarrito extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 3, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 51, 51));
         jLabel1.setText("CARRITO");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 80, -1));
         getContentPane().add(spnCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, 250, -1));
 
         txtTotal.setEditable(false);
@@ -169,7 +169,10 @@ public class VistaCarrito extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 100, -1));
-        getContentPane().add(txtFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 380));
+
+        txtFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Fondos/Icono3.jpg"))); // NOI18N
+        txtFondo.setOpaque(true);
+        getContentPane().add(txtFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-300, -10, 930, 400));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

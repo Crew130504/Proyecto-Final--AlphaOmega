@@ -6,16 +6,21 @@ import java.awt.Image;
 import java.awt.Graphics;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
+import javax.swing.SpinnerNumberModel;
+
 public class VistaComprar extends javax.swing.JFrame {
 
-    
     public VistaComprar() {
-        
         initComponents();
-      setIconImage(getIconImage());
+        SpinnerNumberModel nm= new SpinnerNumberModel();
+        nm.setMinimum(0);
+        this.spnCantidad.setModel(nm);
+        setIconImage(getIconImage()); 
     }
+    
+
     @Override
-    public Image getIconImage(){
+    public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Fondos/IconoVentana2.png"));
         return retValue;
     }
@@ -30,7 +35,7 @@ public class VistaComprar extends javax.swing.JFrame {
     private void initComponents() {
 
         comboxTipo = new javax.swing.JComboBox<>();
-        btnCarrito = new javax.swing.JButton();
+        btnAñadirCarrito = new javax.swing.JButton();
         btnSeleccionarProducto = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         btnVolver = new javax.swing.JButton();
@@ -45,11 +50,12 @@ public class VistaComprar extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtDescripcion = new javax.swing.JTextArea();
         jLabel10 = new javax.swing.JLabel();
-        btnBuscar = new javax.swing.JButton();
+        btnCarrito = new javax.swing.JButton();
         comboxProductosTipo = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         spnCantidad = new javax.swing.JSpinner();
         btnSeleccionarTipo = new javax.swing.JButton();
+        btnBuscar1 = new javax.swing.JButton();
         txtFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -68,17 +74,17 @@ public class VistaComprar extends javax.swing.JFrame {
         });
         getContentPane().add(comboxTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 130, -1));
 
-        btnCarrito.setBackground(new java.awt.Color(153, 153, 153));
-        btnCarrito.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        btnCarrito.setForeground(new java.awt.Color(255, 255, 255));
-        btnCarrito.setText("Añadir al Carrito");
-        btnCarrito.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnCarrito.addActionListener(new java.awt.event.ActionListener() {
+        btnAñadirCarrito.setBackground(new java.awt.Color(153, 153, 153));
+        btnAñadirCarrito.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        btnAñadirCarrito.setForeground(new java.awt.Color(255, 255, 255));
+        btnAñadirCarrito.setText("Añadir al Carrito");
+        btnAñadirCarrito.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnAñadirCarrito.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCarritoActionPerformed(evt);
+                btnAñadirCarritoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCarrito, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 520, 170, -1));
+        getContentPane().add(btnAñadirCarrito, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 520, 170, -1));
 
         btnSeleccionarProducto.setBackground(new java.awt.Color(153, 153, 153));
         btnSeleccionarProducto.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
@@ -193,17 +199,16 @@ public class VistaComprar extends javax.swing.JFrame {
         jLabel10.setToolTipText("");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, -1, -1));
 
-        btnBuscar.setBackground(new java.awt.Color(153, 153, 153));
-        btnBuscar.setFont(new java.awt.Font("Segoe UI Semilight", 1, 18)); // NOI18N
-        btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
-        btnBuscar.setText("Buscar");
-        btnBuscar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+        btnCarrito.setFont(new java.awt.Font("Segoe UI Semilight", 1, 18)); // NOI18N
+        btnCarrito.setForeground(new java.awt.Color(255, 255, 255));
+        btnCarrito.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Fondos/iconoCarrito.png"))); // NOI18N
+        btnCarrito.setBorder(null);
+        btnCarrito.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
+                btnCarritoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 50, 70, 30));
+        getContentPane().add(btnCarrito, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, 60, 50));
 
         comboxProductosTipo.setFont(new java.awt.Font("Segoe UI Semibold", 3, 14)); // NOI18N
         comboxProductosTipo.setForeground(new java.awt.Color(51, 51, 51));
@@ -237,6 +242,18 @@ public class VistaComprar extends javax.swing.JFrame {
         });
         getContentPane().add(btnSeleccionarTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 100, -1));
 
+        btnBuscar1.setBackground(new java.awt.Color(153, 153, 153));
+        btnBuscar1.setFont(new java.awt.Font("Segoe UI Semilight", 1, 18)); // NOI18N
+        btnBuscar1.setForeground(new java.awt.Color(255, 255, 255));
+        btnBuscar1.setText("Buscar");
+        btnBuscar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnBuscar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscar1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBuscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 50, 70, 30));
+
         txtFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Fondos/Icono2.png"))); // NOI18N
         getContentPane().add(txtFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-50, -260, 880, 830));
 
@@ -259,9 +276,9 @@ public class VistaComprar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarActionPerformed
 
-    private void btnCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarritoActionPerformed
+    private void btnAñadirCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirCarritoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnCarritoActionPerformed
+    }//GEN-LAST:event_btnAñadirCarritoActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
 
@@ -283,9 +300,9 @@ public class VistaComprar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
 
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+    private void btnCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarritoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnBuscarActionPerformed
+    }//GEN-LAST:event_btnCarritoActionPerformed
 
     private void comboxProductosTipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboxProductosTipoItemStateChanged
         // TODO add your handling code here:
@@ -299,12 +316,17 @@ public class VistaComprar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSeleccionarTipoActionPerformed
 
+    private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBuscar1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btnBuscar;
+    public javax.swing.JButton btnAñadirCarrito;
+    public javax.swing.JButton btnBuscar1;
     public javax.swing.JButton btnCarrito;
     public javax.swing.JButton btnSeleccionarProducto;
     public javax.swing.JButton btnSeleccionarTipo;
@@ -318,7 +340,7 @@ public class VistaComprar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSpinner spnCantidad;
+    public javax.swing.JSpinner spnCantidad;
     public javax.swing.JTextField txtBuscar;
     public javax.swing.JTextArea txtDescripcion;
     public javax.swing.JTextField txtFabricante;
@@ -328,22 +350,28 @@ public class VistaComprar extends javax.swing.JFrame {
     public javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables
 
-   public void error(String txt){
-       JOptionPane.showMessageDialog(null, txt, "Error",JOptionPane.ERROR_MESSAGE);
-   }
+    public void error(String txt) {
+        JOptionPane.showMessageDialog(null, txt, "Error", JOptionPane.ERROR_MESSAGE);
+    }
 
-   public void errorConsola(String txt){
-       System.out.print(txt);
-   }
-    public void msg(String txt){
-       JOptionPane.showMessageDialog(null, txt, "Eliminada",JOptionPane.INFORMATION_MESSAGE);
-   }  
+    public void errorConsola(String txt) {
+        System.out.print(txt);
+    }
+
+    public void msg(String txt) {
+        JOptionPane.showMessageDialog(null, txt, "Eliminada", JOptionPane.INFORMATION_MESSAGE);
+    }
+
     public void limpiar() {//Acción boton limpiar
         txtNombre.setText("");
         txtPrecio.setText("");
-        txtDescripcion.setText(""); 
+        txtDescripcion.setText("");
         txtFabricante.setText("");
         txtPais.setText("");
     }
-   
+
+    public String capturar(String txt) {
+        return (JOptionPane.showInputDialog(txt));
+    }
+
 }
