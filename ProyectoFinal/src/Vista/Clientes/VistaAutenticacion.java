@@ -22,14 +22,14 @@ public class VistaAutenticacion extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnPendientes = new javax.swing.JButton();
+        btnAutenticar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        txtCorreo = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        txtTelefono1 = new javax.swing.JTextField();
-        txtCorreo1 = new javax.swing.JTextField();
+        txtTelefono = new javax.swing.JTextField();
+        txtCorreo = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        txtTelefono2 = new javax.swing.JTextField();
+        txtDireccion = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         txtFondo = new javax.swing.JLabel();
@@ -37,22 +37,45 @@ public class VistaAutenticacion extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnPendientes.setBackground(new java.awt.Color(153, 153, 153));
-        btnPendientes.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        btnPendientes.setForeground(new java.awt.Color(255, 255, 255));
-        btnPendientes.setText("Autenticar");
-        btnPendientes.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnPendientes.addActionListener(new java.awt.event.ActionListener() {
+        btnAutenticar.setBackground(new java.awt.Color(153, 153, 153));
+        btnAutenticar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        btnAutenticar.setForeground(new java.awt.Color(255, 255, 255));
+        btnAutenticar.setText("Autenticar");
+        btnAutenticar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnAutenticar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPendientesActionPerformed(evt);
+                btnAutenticarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPendientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, 170, -1));
+        getContentPane().add(btnAutenticar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 240, 170, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 3, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
         jLabel3.setText("Nombre");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, -1, -1));
+
+        txtNombre.setFont(new java.awt.Font("Segoe UI Semibold", 2, 14)); // NOI18N
+        txtNombre.setForeground(new java.awt.Color(51, 51, 51));
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, 250, -1));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 3, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel1.setText("Autenticacion");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, -1, -1));
+
+        txtTelefono.setFont(new java.awt.Font("Segoe UI Semibold", 3, 14)); // NOI18N
+        txtTelefono.setForeground(new java.awt.Color(51, 51, 51));
+        txtTelefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTelefonoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 140, 250, -1));
 
         txtCorreo.setFont(new java.awt.Font("Segoe UI Semibold", 2, 14)); // NOI18N
         txtCorreo.setForeground(new java.awt.Color(51, 51, 51));
@@ -61,30 +84,7 @@ public class VistaAutenticacion extends javax.swing.JFrame {
                 txtCorreoActionPerformed(evt);
             }
         });
-        getContentPane().add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, 250, -1));
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 3, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel1.setText("Autenticacion");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, -1, -1));
-
-        txtTelefono1.setFont(new java.awt.Font("Segoe UI Semibold", 3, 14)); // NOI18N
-        txtTelefono1.setForeground(new java.awt.Color(51, 51, 51));
-        txtTelefono1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTelefono1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtTelefono1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 140, 250, -1));
-
-        txtCorreo1.setFont(new java.awt.Font("Segoe UI Semibold", 2, 14)); // NOI18N
-        txtCorreo1.setForeground(new java.awt.Color(51, 51, 51));
-        txtCorreo1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCorreo1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtCorreo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, 250, -1));
+        getContentPane().add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, 250, -1));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI Semibold", 3, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(51, 51, 51));
@@ -92,14 +92,14 @@ public class VistaAutenticacion extends javax.swing.JFrame {
         jLabel9.setToolTipText("");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, -1, -1));
 
-        txtTelefono2.setFont(new java.awt.Font("Segoe UI Semibold", 3, 14)); // NOI18N
-        txtTelefono2.setForeground(new java.awt.Color(51, 51, 51));
-        txtTelefono2.addActionListener(new java.awt.event.ActionListener() {
+        txtDireccion.setFont(new java.awt.Font("Segoe UI Semibold", 3, 14)); // NOI18N
+        txtDireccion.setForeground(new java.awt.Color(51, 51, 51));
+        txtDireccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTelefono2ActionPerformed(evt);
+                txtDireccionActionPerformed(evt);
             }
         });
-        getContentPane().add(txtTelefono2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, 250, -1));
+        getContentPane().add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, 250, -1));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI Semibold", 3, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(51, 51, 51));
@@ -111,47 +111,49 @@ public class VistaAutenticacion extends javax.swing.JFrame {
         jLabel11.setForeground(new java.awt.Color(51, 51, 51));
         jLabel11.setText("Correo");
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, -1, -1));
-        getContentPane().add(txtFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 570, 300));
+
+        txtFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Fondos/Icono2.png"))); // NOI18N
+        getContentPane().add(txtFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-220, -30, 780, 330));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnPendientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPendientesActionPerformed
+    private void btnAutenticarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAutenticarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnPendientesActionPerformed
+    }//GEN-LAST:event_btnAutenticarActionPerformed
 
-    private void txtTelefono1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefono1ActionPerformed
+    private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtTelefono1ActionPerformed
-
-    private void txtCorreo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreo1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCorreo1ActionPerformed
-
-    private void txtTelefono2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefono2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTelefono2ActionPerformed
+    }//GEN-LAST:event_txtTelefonoActionPerformed
 
     private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCorreoActionPerformed
+
+    private void txtDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDireccionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDireccionActionPerformed
+
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreActionPerformed
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btnPendientes;
+    public javax.swing.JButton btnAutenticar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel9;
     public javax.swing.JTextField txtCorreo;
-    public javax.swing.JTextField txtCorreo1;
+    public javax.swing.JTextField txtDireccion;
     private javax.swing.JLabel txtFondo;
-    public javax.swing.JTextField txtTelefono1;
-    public javax.swing.JTextField txtTelefono2;
+    public javax.swing.JTextField txtNombre;
+    public javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 
    public void error(String txt){

@@ -184,6 +184,8 @@ public class VistaClientes extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(51, 51, 51));
         jLabel1.setText("CLIENTES");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, -1, -1));
+
+        txtFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Fondos/Icono2.png"))); // NOI18N
         getContentPane().add(txtFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 380));
 
         pack();

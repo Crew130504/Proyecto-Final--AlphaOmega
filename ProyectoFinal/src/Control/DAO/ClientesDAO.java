@@ -138,4 +138,34 @@ public class ClientesDAO {
         }
         return null;
     }
+    
+    public void insertarDatos(ClienteVO objCliente) {
+        try {
+            // Obtiene una conexión a la base de datos
+            con = Conexion.getConexion();
+            // Consulta de inserción con PreparedStatement
+            String insercion = "INSERT INTO cliente VALUES (?, ?, ?, ?, ?)";
+            // Crea una consulta preparada
+            PreparedStatement pst = (PreparedStatement) con.prepareStatement(insercion);
+
+            // Establece los parámetros de la consulta
+            pst.setString(1, objCliente.getId());
+            pst.setString(2, objCliente.getNombre());
+            pst.setString(3, objCliente.getDireccion());
+            pst.setString(4, objCliente.getTelefono());
+            pst.setString(5, objCliente.getCorreo());
+
+            // Ejecuta la consulta de inserción
+            pst.executeUpdate();
+
+            // Cierra la declaración y desconecta de la base de datos
+            pst.close();
+            Conexion.desconectar();
+
+        } catch (SQLException ex) {
+            // Manejo de excepciones en caso de error
+            ex.printStackTrace();
+            vista.errorConsola("HUBO UN ERROR DURANTE LA INSERCION");
+        }
+    }
 }
