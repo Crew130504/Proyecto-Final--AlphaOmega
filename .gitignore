@@ -5,20 +5,10 @@ nbproject/build-impl.xml
 nbproject/private/
 nbproject/project.properties
 nbproject/project.xml
-nbproject/private/
-nbproject/private/
-nbproject/private/
-nbproject/private/
-nbproject/private/
-src/
-test/
-build.xml
 
-# NetBeans specific #
+# Directorios específicos de NetBeans #
 nbproject/private/
-build/
 nbbuild/
-dist/
 nbdist/
 nbactions.xml
 nb-configuration.xml

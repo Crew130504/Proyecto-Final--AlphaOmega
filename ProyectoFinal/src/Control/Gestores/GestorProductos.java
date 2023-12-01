@@ -20,7 +20,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class GestorProductos implements ActionListener {
-
+    
     private VistaProductos vista;
     private VistaInventario vistaI;
     private VistaInventario vistaInvi = new VistaInventario();
