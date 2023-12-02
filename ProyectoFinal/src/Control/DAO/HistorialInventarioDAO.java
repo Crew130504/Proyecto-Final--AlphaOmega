@@ -1,5 +1,6 @@
 package Control.DAO;
 
+import Modelo.Carrito;
 import Modelo.Conexion.Conexion;
 import Modelo.ProductoVO;
 import Vista.Admin.VistaMenu;
@@ -8,6 +9,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 public class HistorialInventarioDAO {
@@ -74,6 +76,36 @@ public class HistorialInventarioDAO {
             pst.setString(1, producto.getNombre());
             pst.setDouble(2, producto.getStock());
             pst.setString(3, "INGRESO");
+
+            // Ejecuta la consulta de inserción
+            pst.executeUpdate();
+
+            // Cierra la declaración y desconecta de la base de datos
+            pst.close();
+            Conexion.desconectar();
+
+        } catch (SQLException ex) {
+            // Manejo de excepciones en caso de error
+            ex.printStackTrace();
+            vista.errorConsola("NO INSERCION");
+        }
+        
+    }
+    public void salida(ArrayList<Carrito> listaCompra){
+        try {
+            // Obtiene una conexión a la base de datos
+            con = Conexion.getConexion();
+            // Consulta de inserción con PreparedStatement
+            String insercion = "INSERT INTO historialinventario VALUES (?, ?, ?)";
+            // Crea una consulta preparada
+            PreparedStatement pst = (PreparedStatement) con.prepareStatement(insercion);
+            for(Carrito producto: listaCompra){
+                pst.setString(1, producto.getNombre());
+            pst.setDouble(2, producto.getCantidad());
+            pst.setString(3, "SALIDA");
+            }
+            // Establece los parámetros de la consulta
+            
 
             // Ejecuta la consulta de inserción
             pst.executeUpdate();

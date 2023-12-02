@@ -1,5 +1,6 @@
 package Control.DAO;
 
+import Modelo.Carrito;
 import Modelo.Conexion.Conexion;
 import Modelo.DiscosDuros;
 import Modelo.LectoresdeTarjeta;
@@ -25,12 +26,14 @@ public class ProductosDAO {
     private Statement st;
     private ResultSet rs;
     private VistaMenu vista = new VistaMenu();
+
     public ProductosDAO() {
         // Inicializa las variables de conexión y resultados a null
         this.con = null;
         this.st = null;
         this.rs = null;
     }
+
     public ProductoVO comprobarTipo(String tipo, String id, String nombre, String serie,
             String precio, String cantidad, String cantidadMin, String encargo, String imagen,
             String descripcion, String pais, String fabricante, String peso, String medidas,
@@ -73,6 +76,7 @@ public class ProductosDAO {
         }
 
     }
+
     public ArrayList<ProductoVO> listaDeProductos() {
         ArrayList<ProductoVO> listaProductos = new ArrayList<>();
         String consulta = "SELECT * FROM producto";
@@ -104,9 +108,10 @@ public class ProductosDAO {
         }
         return listaProductos;
     }
+
     public ArrayList<ProductoVO> listaDeProductosTipo(String miTipo) {
         ArrayList<ProductoVO> listaProductos = new ArrayList<>();
-        String consulta = "SELECT * FROM producto WHERE `tipo`='"+miTipo+"'";
+        String consulta = "SELECT * FROM producto WHERE `tipo`='" + miTipo + "'";
         try {
             // Obtiene una conexión a la base de datos
             con = Conexion.getConexion();
@@ -134,6 +139,7 @@ public class ProductosDAO {
         }
         return listaProductos;
     }
+
     public void insertarDatos(ProductoVO producto) {
         try {
             // Obtiene una conexión a la base de datos
@@ -174,6 +180,7 @@ public class ProductosDAO {
             vista.errorConsola("NO INSERCION");
         }
     }
+
     public void actualizarDatos(ProductoVO producto) {
         // Consulta de actualización para un objeto ProductosVO
         String modificacion = "UPDATE `producto` SET `id`='" + producto.getId() + "',`nombre`='" + producto.getNombre()
@@ -199,6 +206,7 @@ public class ProductosDAO {
             this.vista.errorConsola("NO MODIFICADO");
         }
     }
+
     public void eliminarProducto(String id) {
         String consulta = "DELETE FROM producto where id='" + id + "'";
         try {
@@ -212,6 +220,7 @@ public class ProductosDAO {
             this.vista.error("NO ELIMINADO");
         }
     }
+
     public DefaultTableModel cargarDatosTabla() {
         try {
             // Consulta SQL para obtener los datos
@@ -252,6 +261,7 @@ public class ProductosDAO {
         }
         return null;
     }
+
     public DefaultTableModel consultarProductosBajos(ArrayList<ProductoVO> listaProductos) {
         String[][] productosBajos = new String[400][2]; // 2 columnas: nombre y cantidad
         DefaultTableModel modelo = new DefaultTableModel();
@@ -305,6 +315,7 @@ public class ProductosDAO {
 
         return modelo;
     }
+
     public ArrayList<ProductoVO> listadePendientesporStock() {
         ArrayList<ProductoVO> listaPendientes = new ArrayList<>();
         String consulta = "SELECT * FROM producto WHERE cantidadMin > cantidad AND (`encargo`='no' OR `encargo`='NO' )";
@@ -336,15 +347,16 @@ public class ProductosDAO {
         }
         return listaPendientes;
     }
+
     public void consultarStock() {
         int total = 0;
         try {
             con = Conexion.getConexion();
             st = con.createStatement();
-            
+
             String consulta = "SELECT `cantidad` FROM producto";
             rs = st.executeQuery(consulta);
-            
+
             while (rs.next()) {
                 int cantidad = Integer.parseInt(rs.getString("cantidad"));
                 total += cantidad;
@@ -364,6 +376,7 @@ public class ProductosDAO {
         }
         this.vista.msg("EL TOTAL DE SU INVENTARIO ES: " + total);
     }
+
     public DefaultTableModel consultarCantidadInventario() {
         String[][] inventario = new String[400][2]; // 2 columnas: nombre y cantidad
         DefaultTableModel modelo = new DefaultTableModel();
@@ -417,15 +430,16 @@ public class ProductosDAO {
 
         return modelo;
     }
+
     public void consultarTotal() {
         double total = 0;
         try {
             con = Conexion.getConexion();
             st = con.createStatement();
-            
+
             String consulta = "SELECT `precio` FROM producto";
             rs = st.executeQuery(consulta);
-            
+
             while (rs.next()) {
                 double cantidad = Double.parseDouble(rs.getString("precio"));
                 total += cantidad;
@@ -445,6 +459,7 @@ public class ProductosDAO {
         }
         this.vista.msg("EL VALOR TOTAL DE SU INVENTARIO ES: " + total);
     }
+
     public DefaultTableModel consultarPrecioInventario() {
         String[][] inventario = new String[400][2]; // 2 columnas: nombre y cantidad
         DefaultTableModel modelo = new DefaultTableModel();
@@ -498,14 +513,15 @@ public class ProductosDAO {
 
         return modelo;
     }
+
     public String consultarStockProducto(ProductoVO producto) {
         try {
             con = Conexion.getConexion();
             st = con.createStatement();
-            
-            String consulta = "SELECT `cantidad` FROM producto WHERE `id`="+producto.getId();
+
+            String consulta = "SELECT `cantidad` FROM producto WHERE `id`=" + producto.getId();
             rs = st.executeQuery(consulta);
-            
+
             while (rs.next()) {
                 String cantidad = rs.getString("cantidad");
                 return cantidad;
@@ -523,10 +539,11 @@ public class ProductosDAO {
                 e.printStackTrace();
             }
         }
-        return null; 
+        return null;
     }
-    public ProductoVO consultarporNombre(String id){
-        String consulta = "SELECT * FROM producto WHERE id='"+id+"'";
+
+    public int consultarporNombre(String nombre) {
+        String consulta = "SELECT * FROM producto WHERE nombre='" + nombre + "'";
         try {
             // Obtiene una conexión a la base de datos
             con = Conexion.getConexion();
@@ -538,13 +555,17 @@ public class ProductosDAO {
             while (rs.next()) {
                 String tipo = rs.getString("tipo");
                 // Crea objetos ProductoVO y los agrega a la lista
-                ProductoVO miProducto=(comprobarTipo(tipo, rs.getString("id"), rs.getString("nombre"),
+                ProductoVO miProducto = (comprobarTipo(tipo, rs.getString("id"), rs.getString("nombre"),
                         rs.getString("serie"), rs.getString("precio"), rs.getString("cantidad"),
                         rs.getString("cantidadMin"), rs.getString("encargo"), rs.getString("imagen"),
                         rs.getString("descripcion"), rs.getString("pais"), rs.getString("fabricante"),
                         rs.getString("peso"), rs.getString("medidas"), rs.getString("garantia"),
                         rs.getString("proveedor")));
-                return miProducto;
+                if (miProducto.getEncargo().equals("SI") || miProducto.getEncargo().equals("Si")) {
+                    return 0;
+                } else {
+                    return miProducto.getStock();
+                }
             }
             // Cierra la declaración y desconecta de la base de datos
             st.close();
@@ -554,6 +575,38 @@ public class ProductosDAO {
             // Manejo de excepciones en caso de error
             vista.errorConsola("No se pudo");
         }
-        return null;
+        return 0;
+    }
+
+    public String salida(ArrayList<Carrito> listaCompra) {
+        int cantidad = 0;
+        boolean pendiente=false;
+        for (Carrito producto : listaCompra) {
+            if (consultarporNombre(producto.getNombre()) == 0) {
+                pendiente =true;
+            }
+                cantidad = (consultarporNombre(producto.getNombre()) - producto.getCantidad());
+                String modificacion = "UPDATE `producto` SET `cantidad`=" + cantidad + " WHERE nombre='" + producto.getNombre() + "'";
+
+                try {
+                    // Obtiene una conexión a la base de datos
+                    con = Conexion.getConexion();
+                    // Crea una declaración SQL
+                    st = (Statement) con.createStatement();
+                    // Ejecuta la consulta de actualización
+                    st.executeUpdate(modificacion);
+                    // Cierra la declaración y desconecta de la base de datos
+                    st.close();
+                    Conexion.desconectar();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                    // Manejo de excepciones en caso de error
+                    this.vista.errorConsola("NO MODIFICADO");
+                }
+        }
+        if(pendiente){
+            return "PENDIENTE";
+        }
+        return "ENTREGADO";
     }
 }

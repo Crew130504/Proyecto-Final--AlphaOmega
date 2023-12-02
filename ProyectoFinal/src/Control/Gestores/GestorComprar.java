@@ -1,9 +1,12 @@
 package Control.Gestores;
 
+import Control.DAO.ClientesDAO;
 import Control.DAO.HistorialInventarioDAO;
 import Control.DAO.ProductosDAO;
 import Control.DAO.VentasDAO;
+import Modelo.ArchivoSecuencial;
 import Modelo.Carrito;
+import Modelo.ClienteVO;
 import Modelo.ProductoVO;
 import Modelo.VentaVO;
 import Vista.Clientes.VistaAutenticacion;
@@ -11,41 +14,54 @@ import Vista.Clientes.VistaCarrito;
 import Vista.Clientes.VistaComprar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class GestorComprar implements ActionListener {
 
-    private VistaComprar vistaComprar;
-    private VistaCarrito vistaCarrito;
-    private VistaAutenticacion vistaautenticar;
+    private final VistaComprar vistaComprar;
+    private final VistaCarrito vistaCarrito;
+    private VistaAutenticacion vistaAutenticar;
     private Gestor vuelta;
-//    private GestorAutenticacion autenticacion = new GestorAutenticacion();
-    private ProductosDAO miProductoDAO = new ProductosDAO();
-    private HistorialInventarioDAO miHistorialDAO = new HistorialInventarioDAO();
-    private VentasDAO miVentaDAO = new VentasDAO();
-    private VentaVO miVenta = new VentaVO();
+
+    private final ProductosDAO miProductoDAO = new ProductosDAO();
+    private final HistorialInventarioDAO miHistorialDAO = new HistorialInventarioDAO();
+    private final VentasDAO miVentaDAO = new VentasDAO();
+    private final ClientesDAO objClienteDAO = new ClientesDAO();
+
+    private final ClienteVO objCliente = new ClienteVO();
+
     private ArrayList<ProductoVO> listaProductos = new ArrayList<>();
-    private ArrayList<VentaVO> miventa = new ArrayList<>();
-    private ArrayList<Carrito> listaCarrito = new ArrayList<>();
-    private double precio;
+    private final ArrayList<Carrito> listaCarrito = new ArrayList<>();
+    private ArrayList<ClienteVO> listaClientesAU= new ArrayList<>();
+
     private double subTotal = 0;
     private double total = 0;
-    private int cantidad = 0;
 
     public GestorComprar() {
         this.vistaComprar = new VistaComprar();
         this.vistaCarrito = new VistaCarrito();
+        this.vistaAutenticar = new VistaAutenticacion();
         this.vistaComprar.btnCarrito.addActionListener(this);
         this.vistaComprar.btnAñadirCarrito.addActionListener(this);
         this.vistaComprar.btnSeleccionarProducto.addActionListener(this);
         this.vistaComprar.btnSeleccionarTipo.addActionListener(this);
         this.vistaComprar.btnVolver.addActionListener(this);
+
         this.vistaCarrito.btnSeleccionar.addActionListener(this);
         this.vistaCarrito.btnComprar.addActionListener(this);
         this.vistaCarrito.btnVolver.addActionListener(this);
         this.vistaCarrito.btnEliminar.addActionListener(this);
         this.vistaCarrito.btnModificar.addActionListener(this);
+
+        this.vistaAutenticar.btnAutenticar.addActionListener(this);
+
     }
 
     public void iniciar() {
@@ -79,6 +95,14 @@ public class GestorComprar implements ActionListener {
         this.vistaCarrito.setResizable(false);
         // Hace visible la vistaBienvenida
         this.vistaCarrito.setVisible(true);
+    }
+
+    public void iniciarAutenticar() {
+        // Centra la vistaBienvenida en el centro de la pantalla
+        this.vistaAutenticar.setLocationRelativeTo(null);
+        this.vistaAutenticar.setResizable(false);
+        // Hace visible la vistaBienvenida
+        this.vistaAutenticar.setVisible(true);
     }
 
     public void llenarComboTipo() {
@@ -144,16 +168,6 @@ public class GestorComprar implements ActionListener {
         }
     }
 
-    private boolean nombreExistenteEnComboBox(String nombre) {
-        int itemCount = this.vistaCarrito.comboxCarrito.getItemCount();
-        for (int i = 0; i < itemCount; i++) {
-            if (nombre.equals(this.vistaCarrito.comboxCarrito.getItemAt(i))) {
-                return true; // El nombre ya existe en el ComboBox
-            }
-        }
-        return false; // El nombre no existe en el ComboBox
-    }
-
     public void seleccionTipo() {
         String nombre = (String) this.vistaComprar.comboxProductosTipo.getSelectedItem();
         for (ProductoVO productoSelec : listaProductos) {
@@ -200,6 +214,47 @@ public class GestorComprar implements ActionListener {
         }
     }
 
+    public String generarIdCliente() {
+        // Crear una instancia de la clase Random
+        Random random = new Random();
+
+        // Generar un número aleatorio de 6 dígitos
+        String Id = ("1000" + random.nextInt(9000));
+
+        return Id;
+    }
+    
+    public String generarFolio(){
+         // Crear una instancia de la clase Random
+        Random random = new Random();
+
+        // Generar un número aleatorio de 6 dígitos
+        String Folio = ("1000" + random.nextInt(9000));
+
+        return Folio;
+    }
+    
+    public String generarDetalles(){
+        for(Carrito producto:listaCarrito){
+            return (producto.getNombre()+"\n"+producto.getCantidad()+"\n"+producto.getPrecio()+"\n"+producto.getImporte());
+        }
+        return null;
+    }
+    
+    public void generarRecibos(VentaVO venta) {
+        ArchivoSecuencial garantia = new ArchivoSecuencial();
+        garantia.limpiarArchivo();
+        garantia.escribir(venta);
+        garantia.cerrar();
+        ArchivoSecuencial comprobante = new ArchivoSecuencial();
+        comprobante.limpiarArchivo();
+        comprobante.escribir(venta);
+        comprobante.cerrar();
+        ArchivoSecuencial importacion = new ArchivoSecuencial();
+        importacion.limpiarArchivo();
+        importacion.escribir(venta);
+        importacion.cerrar();
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.vistaComprar.btnVolver) {
@@ -342,6 +397,76 @@ public class GestorComprar implements ActionListener {
             this.vistaCarrito.limpiar();
             llenarComboCarrito();
             this.vistaCarrito.msg("Producto Eliminado");
+        }
+        if (e.getSource() == this.vistaCarrito.btnComprar) {
+            if (listaCarrito.isEmpty()) {
+                this.vistaAutenticar.error("Carrito vacio");
+            } else {
+                iniciarAutenticar();
+            }
+        }
+        if (e.getSource() == this.vistaAutenticar.btnAutenticar) {
+            String strNombre = this.vistaAutenticar.txtNombre.getText();
+            String strDireccion = this.vistaAutenticar.txtDireccion.getText();
+            String strTelefono = this.vistaAutenticar.txtTelefono.getText();
+            String strCorreo = this.vistaAutenticar.txtCorreo.getText();
+            listaClientesAU = objClienteDAO.listaDeClientes();
+            if(listaClientesAU.isEmpty()){
+                objCliente.setId(generarIdCliente());
+                objCliente.setNombre(strNombre);
+                objCliente.setDireccion(strDireccion);
+                objCliente.setTelefono(strTelefono);
+                objCliente.setCorreo(strCorreo);
+                objClienteDAO.insertarDatos(objCliente);
+                this.vistaAutenticar.msg("AUTENTICACION EXITOSA\nUSUARIO AÑADIDO A LA BASE DE DATOS");
+                this.vistaAutenticar.msg("USTED ES NUESTRO PRIMER CLIENTE");
+            }else{
+                for (ClienteVO cliente : listaClientesAU) {
+                    if (strNombre.equals(cliente.getNombre())) {
+                        if (strDireccion.equals(cliente.getDireccion()) && strTelefono.equals(cliente.getTelefono()) && strCorreo.equals(cliente.getCorreo())) {
+                            this.vistaAutenticar.msg("AUTENTICACION EXITOSA");
+                            this.vistaAutenticar.msg("EL USUARIO YA REGISTRABA EN LA BASE DE DATOS");
+                        } else {
+                            objClienteDAO.actualizarDatos(cliente);
+                            this.vistaAutenticar.msg("AUTENTICACION EXITOSA");
+                            this.vistaAutenticar.msg("DATOS ACTUALIZADOS\nEL USUARIO YA REGISTRABA EN LA BASE DE DATOS");
+                        }
+                    } else {
+                        objCliente.setId(generarIdCliente());
+                        objCliente.setNombre(strNombre);
+                        objCliente.setDireccion(strDireccion);
+                        objCliente.setTelefono(strTelefono);
+                        objCliente.setCorreo(strCorreo);
+                        objClienteDAO.insertarDatos(objCliente);
+                        this.vistaAutenticar.msg("AUTENTICACION EXITOSA");
+                        this.vistaAutenticar.msg("USUARIO AÑADIDO A LA BASE DE DATOS");
+                        break;
+                    }
+                }
+            }
+            this.vistaAutenticar.limpiar();
+            this.vistaAutenticar.setVisible(false);
+            // Obtén la fecha y hora actual
+            LocalDateTime fechaHoraActual = LocalDateTime.now();
+
+            // Formatea la fecha como DATE (YYYY-MM-DD)
+            DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String fechaFormateada = fechaHoraActual.format(formatoFecha);
+
+            // Formatea la hora como TIME (HH:MM:SS)
+            DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("HH:mm:ss");
+            String horaFormateada = fechaHoraActual.format(formatoHora);
+            String estado=this.miProductoDAO.salida(listaCarrito);
+            VentaVO miventa = new VentaVO(generarFolio(),fechaFormateada,horaFormateada,estado,generarDetalles(),subTotal,total);
+            try {
+                this.miVentaDAO.insertarDatos(miventa);
+            } catch (ParseException ex) {
+                Logger.getLogger(GestorComprar.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            this.miHistorialDAO.salida(listaCarrito);
+            generarRecibos(miventa);
+
+//            generarRecibos();
         }
 
     }

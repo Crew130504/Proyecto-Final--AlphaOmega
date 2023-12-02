@@ -13,9 +13,8 @@ import javax.swing.SpinnerNumberModel;
 public class VistaCarrito extends javax.swing.JFrame {
 
     
-    public VistaCarrito() {
-        
-        initComponents();
+    public VistaCarrito() {        
+      initComponents();
       setIconImage(getIconImage()); 
     }
     

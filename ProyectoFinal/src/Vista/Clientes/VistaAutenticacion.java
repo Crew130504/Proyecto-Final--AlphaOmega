@@ -10,7 +10,7 @@ public class VistaAutenticacion extends javax.swing.JFrame {
 
     
     public VistaAutenticacion() {
-        
+       initComponents();
        setIconImage(getIconImage()); 
     }
     
@@ -40,7 +40,7 @@ public class VistaAutenticacion extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         txtFondo = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnAutenticar.setBackground(new java.awt.Color(153, 153, 153));
@@ -171,6 +171,12 @@ public class VistaAutenticacion extends javax.swing.JFrame {
    }
     public void msg(String txt){
        JOptionPane.showMessageDialog(null, txt, "Eliminada",JOptionPane.INFORMATION_MESSAGE);
-   }  
+   } 
+    public void limpiar() {//Acción boton limpiar
+        txtNombre.setText("");
+        txtDireccion.setText("");
+        txtTelefono.setText("");
+        txtCorreo.setText("");
+    }
    
 }

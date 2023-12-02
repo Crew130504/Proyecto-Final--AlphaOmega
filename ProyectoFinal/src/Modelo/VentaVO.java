@@ -1,6 +1,7 @@
 package Modelo;
 
 public class VentaVO {
+    private String cliente;
     private String folio;
     private String fecha;
     private String hora;
@@ -20,6 +21,14 @@ public class VentaVO {
     }
 
     public VentaVO() {
+    }
+
+    public String getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(String cliente) {
+        this.cliente = cliente;
     }
     
     public String getFolio() {
