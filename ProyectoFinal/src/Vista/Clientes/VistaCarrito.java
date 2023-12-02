@@ -37,15 +37,17 @@ public class VistaCarrito extends javax.swing.JFrame {
         comboxCarrito = new javax.swing.JComboBox<>();
         txtPrecio = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        btnModificar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtSubTotal = new javax.swing.JTextField();
+        txtTotal = new javax.swing.JLabel();
+        txtSubTotal = new javax.swing.JLabel();
         btnVolver = new javax.swing.JButton();
         btnComprar = new javax.swing.JButton();
         txtNombre = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        txtTotal = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         spnCantidad = new javax.swing.JTextField();
         btnSeleccionar = new javax.swing.JButton();
@@ -83,26 +85,49 @@ public class VistaCarrito extends javax.swing.JFrame {
         jLabel4.setToolTipText("");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, 80, -1));
 
+        btnModificar.setBackground(new java.awt.Color(153, 153, 153));
+        btnModificar.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
+        btnModificar.setForeground(new java.awt.Color(255, 255, 255));
+        btnModificar.setText("Modificar Item");
+        btnModificar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 110, -1));
+
+        btnEliminar.setBackground(new java.awt.Color(153, 153, 153));
+        btnEliminar.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
+        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEliminar.setText("Eliminar");
+        btnEliminar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, 110, -1));
+
         jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 3, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel3.setText("SubTotal");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 230, -1, -1));
+        jLabel3.setText("SubTotal  $");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 230, 100, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI Semibold", 3, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(51, 51, 51));
         jLabel5.setText("Precio");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, -1, -1));
 
-        txtSubTotal.setEditable(false);
-        txtSubTotal.setBackground(new java.awt.Color(255, 255, 255));
-        txtSubTotal.setFont(new java.awt.Font("Segoe UI Semibold", 2, 14)); // NOI18N
+        txtTotal.setFont(new java.awt.Font("Segoe UI Semibold", 3, 18)); // NOI18N
+        txtTotal.setForeground(new java.awt.Color(51, 51, 51));
+        txtTotal.setText("0.00 ");
+        getContentPane().add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 270, 80, -1));
+
+        txtSubTotal.setFont(new java.awt.Font("Segoe UI Semibold", 3, 18)); // NOI18N
         txtSubTotal.setForeground(new java.awt.Color(51, 51, 51));
-        txtSubTotal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSubTotalActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtSubTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 230, 250, -1));
+        txtSubTotal.setText("0.00 ");
+        getContentPane().add(txtSubTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 230, 80, -1));
 
         btnVolver.setBackground(new java.awt.Color(153, 153, 153));
         btnVolver.setFont(new java.awt.Font("Segoe UI Semilight", 3, 18)); // NOI18N
@@ -146,21 +171,10 @@ public class VistaCarrito extends javax.swing.JFrame {
         jLabel1.setText("CARRITO");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 80, -1));
 
-        txtTotal.setEditable(false);
-        txtTotal.setBackground(new java.awt.Color(255, 255, 255));
-        txtTotal.setFont(new java.awt.Font("Segoe UI Semibold", 2, 14)); // NOI18N
-        txtTotal.setForeground(new java.awt.Color(51, 51, 51));
-        txtTotal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTotalActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 270, 250, -1));
-
         jLabel7.setFont(new java.awt.Font("Segoe UI Semibold", 3, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel7.setText("Total");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, -1, -1));
+        jLabel7.setText("Total        $");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 270, 100, -1));
 
         spnCantidad.setFont(new java.awt.Font("Segoe UI Semibold", 2, 14)); // NOI18N
         spnCantidad.setForeground(new java.awt.Color(51, 51, 51));
@@ -194,10 +208,6 @@ public class VistaCarrito extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_comboxCarritoActionPerformed
 
-    private void txtSubTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSubTotalActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSubTotalActionPerformed
-
     private void txtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPrecioActionPerformed
@@ -214,10 +224,6 @@ public class VistaCarrito extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
 
-    private void txtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTotalActionPerformed
-
     private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSeleccionarActionPerformed
@@ -230,12 +236,22 @@ public class VistaCarrito extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnVolverActionPerformed
 
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnComprar;
+    public javax.swing.JButton btnEliminar;
+    public javax.swing.JButton btnModificar;
     public javax.swing.JButton btnSeleccionar;
     public javax.swing.JButton btnVolver;
     public javax.swing.JComboBox<String> comboxCarrito;
@@ -249,8 +265,8 @@ public class VistaCarrito extends javax.swing.JFrame {
     private javax.swing.JLabel txtFondo;
     public javax.swing.JTextField txtNombre;
     public javax.swing.JTextField txtPrecio;
-    public javax.swing.JTextField txtSubTotal;
-    public javax.swing.JTextField txtTotal;
+    public javax.swing.JLabel txtSubTotal;
+    public javax.swing.JLabel txtTotal;
     // End of variables declaration//GEN-END:variables
 
    public void error(String txt){

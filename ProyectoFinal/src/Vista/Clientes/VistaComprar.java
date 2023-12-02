@@ -6,15 +6,12 @@ import java.awt.Image;
 import java.awt.Graphics;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
-import javax.swing.SpinnerNumberModel;
 
 public class VistaComprar extends javax.swing.JFrame {
 
     public VistaComprar() {
         initComponents();
-        SpinnerNumberModel nm= new SpinnerNumberModel();
-        nm.setMinimum(0);
-        this.spnCantidad.setModel(nm);
+      
         setIconImage(getIconImage()); 
     }
     
@@ -42,9 +39,9 @@ public class VistaComprar extends javax.swing.JFrame {
         txtNombre = new javax.swing.JTextField();
         txtBuscar = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        txtPrecio = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         txtPais = new javax.swing.JTextField();
-        txtPrecio = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         txtFabricante = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -140,6 +137,11 @@ public class VistaComprar extends javax.swing.JFrame {
         jLabel1.setText("COMPRAS");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, -1, -1));
 
+        txtPrecio.setFont(new java.awt.Font("Segoe UI Semibold", 3, 18)); // NOI18N
+        txtPrecio.setForeground(new java.awt.Color(51, 51, 51));
+        txtPrecio.setText("0.00 ");
+        getContentPane().add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 480, 80, -1));
+
         jLabel7.setFont(new java.awt.Font("Segoe UI Semibold", 3, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(51, 51, 51));
         jLabel7.setText("Descripcion");
@@ -156,17 +158,6 @@ public class VistaComprar extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtPais, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 270, 250, -1));
-
-        txtPrecio.setEditable(false);
-        txtPrecio.setBackground(new java.awt.Color(255, 255, 255));
-        txtPrecio.setFont(new java.awt.Font("Segoe UI Semibold", 2, 14)); // NOI18N
-        txtPrecio.setForeground(new java.awt.Color(51, 51, 51));
-        txtPrecio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPrecioActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 470, 250, -1));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI Semibold", 3, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(51, 51, 51));
@@ -230,8 +221,10 @@ public class VistaComprar extends javax.swing.JFrame {
 
         jLabel11.setFont(new java.awt.Font("Segoe UI Semibold", 3, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel11.setText("Precio");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 460, -1, -1));
+        jLabel11.setText("Precio $");
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 480, -1, -1));
+
+        spnCantidad.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
         getContentPane().add(spnCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 520, -1, -1));
 
         btnSeleccionarTipo.setBackground(new java.awt.Color(153, 153, 153));
@@ -292,10 +285,6 @@ public class VistaComprar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPaisActionPerformed
 
-    private void txtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPrecioActionPerformed
-
     private void txtFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFabricanteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFabricanteActionPerformed
@@ -351,7 +340,7 @@ public class VistaComprar extends javax.swing.JFrame {
     private javax.swing.JLabel txtFondo;
     public javax.swing.JTextField txtNombre;
     public javax.swing.JTextField txtPais;
-    public javax.swing.JTextField txtPrecio;
+    public javax.swing.JLabel txtPrecio;
     // End of variables declaration//GEN-END:variables
 
     public void error(String txt) {
