@@ -14,6 +14,7 @@ import Vista.Clientes.VistaCarrito;
 import Vista.Clientes.VistaComprar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -35,11 +36,9 @@ public class GestorComprar implements ActionListener {
     private final VentasDAO miVentaDAO = new VentasDAO();
     private final ClientesDAO objClienteDAO = new ClientesDAO();
 
-    private final ClienteVO objCliente = new ClienteVO();
-
     private ArrayList<ProductoVO> listaProductos = new ArrayList<>();
     private final ArrayList<Carrito> listaCarrito = new ArrayList<>();
-    private ArrayList<ClienteVO> listaClientesAU= new ArrayList<>();
+    private ArrayList<ClienteVO> listaClientesAU = new ArrayList<>();
 
     private double subTotal = 0;
     private double total = 0;
@@ -223,9 +222,9 @@ public class GestorComprar implements ActionListener {
 
         return Id;
     }
-    
-    public String generarFolio(){
-         // Crear una instancia de la clase Random
+
+    public String generarFolio() {
+        // Crear una instancia de la clase Random
         Random random = new Random();
 
         // Generar un número aleatorio de 6 dígitos
@@ -233,28 +232,47 @@ public class GestorComprar implements ActionListener {
 
         return Folio;
     }
-    
-    public String generarDetalles(){
-        for(Carrito producto:listaCarrito){
-            return (producto.getNombre()+"\n"+producto.getCantidad()+"\n"+producto.getPrecio()+"\n"+producto.getImporte());
+
+    public String generarDetalles() {
+        for (Carrito producto : listaCarrito) {
+            return (producto.getNombre() + "\n" + producto.getCantidad() + "\n" + producto.getPrecio() + "\n" + producto.getImporte());
         }
         return null;
     }
-    
-    public void generarRecibos(VentaVO venta) {
-        ArchivoSecuencial garantia = new ArchivoSecuencial();
+
+    public void generarRecibos(ClienteVO objCliente) {
+        // Obtén la fecha y hora actual
+        LocalDateTime fechaHoraActual = LocalDateTime.now();
+
+        // Formatea la fecha como DATE (YYYY-MM-DD)
+        DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String fechaFormateada = fechaHoraActual.format(formatoFecha);
+
+        // Formatea la hora como TIME (HH:MM:SS)
+        DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("HH:mm:ss");
+        String horaFormateada = fechaHoraActual.format(formatoHora);
+        String estado = this.miProductoDAO.salida(listaCarrito);
+        VentaVO miventa = new VentaVO(objCliente.getNombre(), generarFolio(), fechaFormateada, horaFormateada, estado, generarDetalles(), listaProductos, listaCarrito, subTotal, total);
+        try {
+            this.miVentaDAO.insertarDatos(miventa);
+        } catch (ParseException ex) {
+            Logger.getLogger(GestorComprar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.miHistorialDAO.salida(listaCarrito);
+        ArchivoSecuencial garantia = new ArchivoSecuencial("!Garantia_" + miventa.getFolio() + "_" + miventa.getCliente());
         garantia.limpiarArchivo();
-        garantia.escribir(venta);
-        garantia.cerrar();
-        ArchivoSecuencial comprobante = new ArchivoSecuencial();
+        garantia.fusionarListas(listaProductos, listaCarrito);
+        garantia.escribirGarantia(miventa, objCliente);
+        ArchivoSecuencial comprobante = new ArchivoSecuencial("!Comprobante_" + miventa.getFolio() + "_" + miventa.getCliente());
         comprobante.limpiarArchivo();
-        comprobante.escribir(venta);
-        comprobante.cerrar();
-        ArchivoSecuencial importacion = new ArchivoSecuencial();
+        comprobante.fusionarListas(listaProductos, listaCarrito);
+        comprobante.escribirComprobante(miventa);
+        ArchivoSecuencial importacion = new ArchivoSecuencial("!Importacion_" + miventa.getFolio() + "_" + miventa.getCliente());
         importacion.limpiarArchivo();
-        importacion.escribir(venta);
-        importacion.cerrar();
+        importacion.fusionarListas(listaProductos, listaCarrito);
+        importacion.escribirImportacion(miventa);
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.vistaComprar.btnVolver) {
@@ -410,63 +428,43 @@ public class GestorComprar implements ActionListener {
             String strDireccion = this.vistaAutenticar.txtDireccion.getText();
             String strTelefono = this.vistaAutenticar.txtTelefono.getText();
             String strCorreo = this.vistaAutenticar.txtCorreo.getText();
-            listaClientesAU = objClienteDAO.listaDeClientes();
-            if(listaClientesAU.isEmpty()){
-                objCliente.setId(generarIdCliente());
-                objCliente.setNombre(strNombre);
-                objCliente.setDireccion(strDireccion);
-                objCliente.setTelefono(strTelefono);
-                objCliente.setCorreo(strCorreo);
-                objClienteDAO.insertarDatos(objCliente);
-                this.vistaAutenticar.msg("AUTENTICACION EXITOSA\nUSUARIO AÑADIDO A LA BASE DE DATOS");
-                this.vistaAutenticar.msg("USTED ES NUESTRO PRIMER CLIENTE");
-            }else{
-                for (ClienteVO cliente : listaClientesAU) {
-                    if (strNombre.equals(cliente.getNombre())) {
-                        if (strDireccion.equals(cliente.getDireccion()) && strTelefono.equals(cliente.getTelefono()) && strCorreo.equals(cliente.getCorreo())) {
-                            this.vistaAutenticar.msg("AUTENTICACION EXITOSA");
-                            this.vistaAutenticar.msg("EL USUARIO YA REGISTRABA EN LA BASE DE DATOS");
-                        } else {
-                            objClienteDAO.actualizarDatos(cliente);
-                            this.vistaAutenticar.msg("AUTENTICACION EXITOSA");
-                            this.vistaAutenticar.msg("DATOS ACTUALIZADOS\nEL USUARIO YA REGISTRABA EN LA BASE DE DATOS");
-                        }
-                    } else {
-                        objCliente.setId(generarIdCliente());
-                        objCliente.setNombre(strNombre);
-                        objCliente.setDireccion(strDireccion);
-                        objCliente.setTelefono(strTelefono);
-                        objCliente.setCorreo(strCorreo);
-                        objClienteDAO.insertarDatos(objCliente);
+            ClienteVO existingClient = this.objClienteDAO.buscarClientePorNombre(strNombre);
+
+
+                if (existingClient == null) {
+                    existingClient= new ClienteVO();
+                    // Cliente no existe, realiza la inserción
+                    existingClient.setId(generarIdCliente());
+                    existingClient.setNombre(strNombre);
+                    existingClient.setDireccion(strDireccion);
+                    existingClient.setTelefono(strTelefono);
+                    existingClient.setCorreo(strCorreo);
+                    this.objClienteDAO.insertarDatos(existingClient);
+                    this.vistaAutenticar.msg("AUTENTICACION EXITOSA\nUSUARIO AÑADIDO A LA BASE DE DATOS");
+                    this.vistaAutenticar.msg("USTED ES NUESTRO PRIMER CLIENTE");
+                } else {
+                    // Cliente existe, verifica la igualdad de datos
+                    if (strDireccion.equals(existingClient.getDireccion())
+                            && strTelefono.equals(existingClient.getTelefono())
+                            && strCorreo.equals(existingClient.getCorreo())) {
                         this.vistaAutenticar.msg("AUTENTICACION EXITOSA");
-                        this.vistaAutenticar.msg("USUARIO AÑADIDO A LA BASE DE DATOS");
-                        break;
+                        this.vistaAutenticar.msg("EL USUARIO YA REGISTRABA EN LA BASE DE DATOS");
+                    } else {
+                        // Actualiza los datos del cliente existente
+                        existingClient.setDireccion(strDireccion);
+                        existingClient.setTelefono(strTelefono);
+                        existingClient.setCorreo(strCorreo);
+                        this.objClienteDAO.actualizarDatos(existingClient);
+                        this.vistaAutenticar.msg("AUTENTICACION EXITOSA");
+                        this.vistaAutenticar.msg("DATOS ACTUALIZADOS\nEL USUARIO YA REGISTRABA EN LA BASE DE DATOS");
                     }
                 }
-            }
-            this.vistaAutenticar.limpiar();
-            this.vistaAutenticar.setVisible(false);
-            // Obtén la fecha y hora actual
-            LocalDateTime fechaHoraActual = LocalDateTime.now();
 
-            // Formatea la fecha como DATE (YYYY-MM-DD)
-            DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            String fechaFormateada = fechaHoraActual.format(formatoFecha);
-
-            // Formatea la hora como TIME (HH:MM:SS)
-            DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("HH:mm:ss");
-            String horaFormateada = fechaHoraActual.format(formatoHora);
-            String estado=this.miProductoDAO.salida(listaCarrito);
-            VentaVO miventa = new VentaVO(generarFolio(),fechaFormateada,horaFormateada,estado,generarDetalles(),subTotal,total);
-            try {
-                this.miVentaDAO.insertarDatos(miventa);
-            } catch (ParseException ex) {
-                Logger.getLogger(GestorComprar.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            this.miHistorialDAO.salida(listaCarrito);
-            generarRecibos(miventa);
-
-//            generarRecibos();
+                this.vistaAutenticar.limpiar();
+                this.vistaAutenticar.setVisible(false);
+                generarRecibos(existingClient);
+                this.vistaCarrito.setVisible(false);
+                iniciar();
         }
 
     }

@@ -168,4 +168,31 @@ public class ClientesDAO {
             vista.errorConsola("HUBO UN ERROR DURANTE LA INSERCION");
         }
     }
+    public ClienteVO buscarClientePorNombre(String strNombre){
+        String consulta = "SELECT * FROM cliente WHERE nombre='" + strNombre + "'";
+        try {
+            // Obtiene una conexión a la base de datos
+            con = Conexion.getConexion();
+            // Crea una declaración SQL
+            st = (Statement) con.createStatement();
+            // Ejecuta la consulta
+            rs = st.executeQuery(consulta);
+
+            while (rs.next()) {
+
+                // Crea objetos ProductoVO y los agrega a la lista
+                ClienteVO miCliente =  new ClienteVO(rs.getString("nombre"),rs.getString("direccion"),
+                        rs.getString("telefono"),rs.getString("correo"),rs.getString("id"));
+                return miCliente;
+            }
+            // Cierra la declaración y desconecta de la base de datos
+            st.close();
+            Conexion.desconectar();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            // Manejo de excepciones en caso de error
+            vista.errorConsola("No se pudo");
+        }
+        return null;
+    }
 }
