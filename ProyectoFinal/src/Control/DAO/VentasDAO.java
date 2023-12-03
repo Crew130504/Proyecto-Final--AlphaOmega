@@ -119,38 +119,6 @@ public class VentasDAO {
         return null;
 
     }
-    public ArrayList<VentaVO> consultarPorDia(int dia) {
-        ArrayList<VentaVO> listaVentas = new ArrayList<>();
-        try {
-            // Crea una consulta
-            String consulta = "SELECT * FROM `ventas` WHERE DAY(`FechaColumna`) ="+dia;
-
-            // Obtiene una conexión a la base de datos
-            con = Conexion.getConexion();
-            // Crea una declaración SQL
-            st = (Statement) con.createStatement();
-            // Ejecuta la consulta
-            rs = st.executeQuery(consulta);
-
-            while (rs.next()) {
-                listaVentas.add (new VentaVO(rs.getString("Cliente"), rs.getString("Folio"),
-                        rs.getString("Fecha"), rs.getString("Hora"),
-                        rs.getString("Estado"), rs.getString("Detalles"),
-                        Double.parseDouble(rs.getString("Subtotal")), Double.parseDouble(rs.getString("Total"))));
-            }
-            // Cierra la declaración y desconecta de la base de datos
-            st.close();
-            Conexion.desconectar();
-
-        } catch (SQLException ex) {
-            // Manejo de excepciones en caso de error
-            ex.printStackTrace();
-            vista.errorConsola("NO INSERCION");
-        }
-        return listaVentas;
-
-    }
-
     public void actualizarDato(VentaVO venta) {
         // Consulta de actualización para un objeto ProductosVO
         String modificacion = "UPDATE `ventas` SET `Estado`='" + venta.getEstado() + "' WHERE `Folio`='" + venta.getFolio() + "'";
@@ -212,10 +180,10 @@ public class VentasDAO {
         }
         return null;
     }
-        public DefaultTableModel cargarDatosTablaDia(int dia) {
+        public DefaultTableModel cargarDatosTablaDia(int dia,int mes,int year) {
         try {
             // Consulta SQL para obtener los datos
-            String consulta = "SELECT * FROM `ventas` WHERE DAY(`FechaColumna`) ="+dia;
+            String consulta = "SELECT * FROM `ventas` WHERE DAY(`Fecha`) ="+dia+" AND MONTH(`Fecha`) ="+mes+" AND YEAR(`Fecha`) ="+year;
             con = Conexion.getConexion();
             st = con.createStatement();
             rs = st.executeQuery(consulta);

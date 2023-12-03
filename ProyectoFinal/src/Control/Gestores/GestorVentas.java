@@ -158,21 +158,22 @@ public class GestorVentas implements ActionListener {
         if (e.getSource() == this.vista.btnHistorial) {
             String opcion = this.vista.capturar("1)DIA\n2)MES\n3)AÑO");
             switch (opcion) {
-                case "1":
+                case "1" -> {
                     int dia = Integer.parseInt(this.vista.capturar("Digite el Dia: "));
-                    this.vistaTabla.mostrarVentana(this.dao.cargarDatosTablaDia(dia), "VENTAS POR DIA");
-                    break;
-                case "2":
+                    int mes1 = Integer.parseInt(this.vista.capturar("Digite el numero del Mes: "));
+                    int year1 = Integer.parseInt(this.vista.capturar("Digite el Año: "));
+                    this.vistaTabla.mostrarVentana(this.dao.cargarDatosTablaDia(dia,mes1,year1), "VENTAS POR DIA");
+                }
+                case "2" -> {
                     int mes = Integer.parseInt(this.vista.capturar("Digite el numero del Mes: "));
                     this.vistaTabla.mostrarVentana(this.dao.cargarDatosTablaMes(mes), "VENTAS POR DIA");
-                    
-                    
-                case "3":
+                }
+                case "3" -> {
                     int year = Integer.parseInt(this.vista.capturar("Digite el Año: "));
                     this.vistaTabla.mostrarVentana(this.dao.cargarDatosTablaYear(year), "VENTAS POR DIA");
-                    
-                default:
-                    break;
+                }
+                default -> {
+                }
             }
 
         }

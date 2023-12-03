@@ -13,11 +13,20 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/juanp/OneDrive/Documentos/!!TRABAJOS/REVIVIR/Proyecto-Final--AlphaOmega/ProyectoFinal/src/Modelo/VentaVO.java</file>
-            <file>file:/C:/Users/juanp/OneDrive/Documentos/!!TRABAJOS/REVIVIR/Proyecto-Final--AlphaOmega/ProyectoFinal/src/Control/Gestores/GestorMenu.java</file>
+            <file>file:/C:/Users/juanp/OneDrive/Documentos/!!TRABAJOS/REVIVIR/Proyecto-Final--AlphaOmega/ProyectoFinal/src/Vista/Admin/VistaClientes.java</file>
+            <file>file:/C:/Users/juanp/OneDrive/Documentos/!!TRABAJOS/REVIVIR/Proyecto-Final--AlphaOmega/ProyectoFinal/src/Control/DAO/ProveedoresDAO.java</file>
             <file>file:/C:/Users/juanp/OneDrive/Documentos/!!TRABAJOS/REVIVIR/Proyecto-Final--AlphaOmega/ProyectoFinal/src/Control/Gestores/GestorVentas.java</file>
             <file>file:/C:/Users/juanp/OneDrive/Documentos/!!TRABAJOS/REVIVIR/Proyecto-Final--AlphaOmega/ProyectoFinal/src/Control/DAO/VentasDAO.java</file>
+            <file>file:/C:/Users/juanp/OneDrive/Documentos/!!TRABAJOS/REVIVIR/Proyecto-Final--AlphaOmega/ProyectoFinal/src/Control/Launcher.java</file>
+            <file>file:/C:/Users/juanp/OneDrive/Documentos/!!TRABAJOS/REVIVIR/Proyecto-Final--AlphaOmega/ProyectoFinal/src/Control/Gestores/GestorProveedores.java</file>
+            <file>file:/C:/Users/juanp/OneDrive/Documentos/!!TRABAJOS/REVIVIR/Proyecto-Final--AlphaOmega/ProyectoFinal/src/Control/Gestores/GestorClientes.java</file>
+            <file>file:/C:/Users/juanp/OneDrive/Documentos/!!TRABAJOS/REVIVIR/Proyecto-Final--AlphaOmega/ProyectoFinal/src/Control/Gestores/GestorProductos.java</file>
+            <file>file:/C:/Users/juanp/OneDrive/Documentos/!!TRABAJOS/REVIVIR/Proyecto-Final--AlphaOmega/ProyectoFinal/src/Control/Gestores/GestorComprar.java</file>
+            <file>file:/C:/Users/juanp/OneDrive/Documentos/!!TRABAJOS/REVIVIR/Proyecto-Final--AlphaOmega/ProyectoFinal/src/Control/DAO/ClientesDAO.java</file>
+            <file>file:/C:/Users/juanp/OneDrive/Documentos/!!TRABAJOS/REVIVIR/Proyecto-Final--AlphaOmega/ProyectoFinal/src/Vista/VistaBienvenida.java</file>
             <file>file:/C:/Users/juanp/OneDrive/Documentos/!!TRABAJOS/REVIVIR/Proyecto-Final--AlphaOmega/ProyectoFinal/src/Vista/Admin/VistaVentas.java</file>
             <file>file:/C:/Users/juanp/OneDrive/Documentos/!!TRABAJOS/REVIVIR/Proyecto-Final--AlphaOmega/ProyectoFinal/src/Control/DAO/ProductosDAO.java</file>
+            <file>file:/C:/Users/juanp/OneDrive/Documentos/!!TRABAJOS/REVIVIR/Proyecto-Final--AlphaOmega/ProyectoFinal/src/Control/DAO/HistorialInventarioDAO.java</file>
         </group>
     </open-files>
 </project-private>

@@ -1,4 +1,3 @@
-// Importación de clases y paquetes necesarios
 package Control.Gestores;
 
 import Control.DAO.ProveedoresDAO;
