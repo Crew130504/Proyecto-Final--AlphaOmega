@@ -13,7 +13,7 @@ public class GestorProveedores implements ActionListener {
 
     // Declaración de variables de instancia
     private ArrayList<ProveedoresVO> listaProveedores;
-    VistaProveedores vista;
+    private VistaProveedores vista;
     private GestorMenu gestorMenu;
     private ProveedoresVO objProveedores = new ProveedoresVO();
     private ProveedoresDAO miProveedorDAO = new ProveedoresDAO();

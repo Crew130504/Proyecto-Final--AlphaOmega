@@ -64,6 +64,7 @@ public class GestorComprar implements ActionListener {
     }
 
     public void iniciar() {
+        this.listaCarrito.removeAll(listaCarrito);
         //Llenar el combo de Tipos
         llenarComboTipo();
         vistaComprar.comboxProductosTipo.addItem("Seleccionar");
@@ -234,10 +235,16 @@ public class GestorComprar implements ActionListener {
     }
 
     public String generarDetalles() {
+        StringBuilder detalles = new StringBuilder();
+
         for (Carrito producto : listaCarrito) {
-            return (producto.getNombre() + "\n" + producto.getCantidad() + "\n" + producto.getPrecio() + "\n" + producto.getImporte());
+            detalles.append(producto.getNombre()).append("\n")
+                    .append(producto.getCantidad()).append("\n")
+                    .append(producto.getPrecio()).append("\n")
+                    .append(producto.getImporte()).append("\n");
         }
-        return null;
+
+        return detalles.toString();
     }
 
     public void generarRecibos(ClienteVO objCliente) {
@@ -430,41 +437,40 @@ public class GestorComprar implements ActionListener {
             String strCorreo = this.vistaAutenticar.txtCorreo.getText();
             ClienteVO existingClient = this.objClienteDAO.buscarClientePorNombre(strNombre);
 
-
-                if (existingClient == null) {
-                    existingClient= new ClienteVO();
-                    // Cliente no existe, realiza la inserción
-                    existingClient.setId(generarIdCliente());
-                    existingClient.setNombre(strNombre);
+            if (existingClient == null) {
+                existingClient = new ClienteVO();
+                // Cliente no existe, realiza la inserción
+                existingClient.setId(generarIdCliente());
+                existingClient.setNombre(strNombre);
+                existingClient.setDireccion(strDireccion);
+                existingClient.setTelefono(strTelefono);
+                existingClient.setCorreo(strCorreo);
+                this.objClienteDAO.insertarDatos(existingClient);
+                this.vistaAutenticar.msg("AUTENTICACION EXITOSA\nUSUARIO AÑADIDO A LA BASE DE DATOS");
+                this.vistaAutenticar.msg("USTED ES NUESTRO PRIMER CLIENTE");
+            } else {
+                // Cliente existe, verifica la igualdad de datos
+                if (strDireccion.equals(existingClient.getDireccion())
+                        && strTelefono.equals(existingClient.getTelefono())
+                        && strCorreo.equals(existingClient.getCorreo())) {
+                    this.vistaAutenticar.msg("AUTENTICACION EXITOSA");
+                    this.vistaAutenticar.msg("EL USUARIO YA REGISTRABA EN LA BASE DE DATOS");
+                } else {
+                    // Actualiza los datos del cliente existente
                     existingClient.setDireccion(strDireccion);
                     existingClient.setTelefono(strTelefono);
                     existingClient.setCorreo(strCorreo);
-                    this.objClienteDAO.insertarDatos(existingClient);
-                    this.vistaAutenticar.msg("AUTENTICACION EXITOSA\nUSUARIO AÑADIDO A LA BASE DE DATOS");
-                    this.vistaAutenticar.msg("USTED ES NUESTRO PRIMER CLIENTE");
-                } else {
-                    // Cliente existe, verifica la igualdad de datos
-                    if (strDireccion.equals(existingClient.getDireccion())
-                            && strTelefono.equals(existingClient.getTelefono())
-                            && strCorreo.equals(existingClient.getCorreo())) {
-                        this.vistaAutenticar.msg("AUTENTICACION EXITOSA");
-                        this.vistaAutenticar.msg("EL USUARIO YA REGISTRABA EN LA BASE DE DATOS");
-                    } else {
-                        // Actualiza los datos del cliente existente
-                        existingClient.setDireccion(strDireccion);
-                        existingClient.setTelefono(strTelefono);
-                        existingClient.setCorreo(strCorreo);
-                        this.objClienteDAO.actualizarDatos(existingClient);
-                        this.vistaAutenticar.msg("AUTENTICACION EXITOSA");
-                        this.vistaAutenticar.msg("DATOS ACTUALIZADOS\nEL USUARIO YA REGISTRABA EN LA BASE DE DATOS");
-                    }
+                    this.objClienteDAO.actualizarDatos(existingClient);
+                    this.vistaAutenticar.msg("AUTENTICACION EXITOSA");
+                    this.vistaAutenticar.msg("DATOS ACTUALIZADOS\nEL USUARIO YA REGISTRABA EN LA BASE DE DATOS");
                 }
+            }
 
-                this.vistaAutenticar.limpiar();
-                this.vistaAutenticar.setVisible(false);
-                generarRecibos(existingClient);
-                this.vistaCarrito.setVisible(false);
-                iniciar();
+            this.vistaAutenticar.limpiar();
+            this.vistaAutenticar.setVisible(false);
+            generarRecibos(existingClient);
+            this.vistaCarrito.setVisible(false);
+            iniciar();
         }
 
     }

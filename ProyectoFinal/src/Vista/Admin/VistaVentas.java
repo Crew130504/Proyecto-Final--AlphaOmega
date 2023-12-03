@@ -10,7 +10,7 @@ public class VistaVentas extends javax.swing.JFrame {
 
     
     public VistaVentas() {
-        
+        initComponents();
       setIconImage(getIconImage()); 
     }
     
@@ -29,6 +29,8 @@ public class VistaVentas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        comboxVentas = new javax.swing.JComboBox<>();
+        btnSeleccionar = new javax.swing.JButton();
         btnComprobar = new javax.swing.JButton();
         btnHistorial = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
@@ -40,7 +42,7 @@ public class VistaVentas extends javax.swing.JFrame {
         txtFolio = new javax.swing.JTextField();
         txtHora = new javax.swing.JTextField();
         btnLimpiar = new javax.swing.JButton();
-        txtBusquedaFolio = new javax.swing.JTextField();
+        txtBuscarFolio = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -52,12 +54,38 @@ public class VistaVentas extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtDetalles = new javax.swing.JTextArea();
         jLabel10 = new javax.swing.JLabel();
-        btnPendientes1 = new javax.swing.JButton();
+        btnPendientes = new javax.swing.JButton();
         txtNombre = new javax.swing.JTextField();
         txtFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        comboxVentas.setFont(new java.awt.Font("Segoe UI Semibold", 3, 14)); // NOI18N
+        comboxVentas.setForeground(new java.awt.Color(51, 51, 51));
+        comboxVentas.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, new java.awt.Color(102, 102, 102)));
+        comboxVentas.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboxVentasItemStateChanged(evt);
+            }
+        });
+        comboxVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboxVentasActionPerformed(evt);
+            }
+        });
+        getContentPane().add(comboxVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 120, -1));
+
+        btnSeleccionar.setFont(new java.awt.Font("Segoe UI Semilight", 3, 14)); // NOI18N
+        btnSeleccionar.setForeground(new java.awt.Color(51, 51, 51));
+        btnSeleccionar.setText("Seleccionar");
+        btnSeleccionar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, new java.awt.Color(102, 102, 102)));
+        btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeleccionarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSeleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 120, -1));
 
         btnComprobar.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         btnComprobar.setForeground(new java.awt.Color(51, 51, 51));
@@ -85,7 +113,7 @@ public class VistaVentas extends javax.swing.JFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 150, -1));
+        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 120, -1));
 
         txtFecha.setEditable(false);
         txtFecha.setBackground(new java.awt.Color(255, 255, 255));
@@ -161,14 +189,14 @@ public class VistaVentas extends javax.swing.JFrame {
         });
         getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 590, 520, -1));
 
-        txtBusquedaFolio.setFont(new java.awt.Font("Segoe UI Semibold", 2, 14)); // NOI18N
-        txtBusquedaFolio.setForeground(new java.awt.Color(51, 51, 51));
-        txtBusquedaFolio.addActionListener(new java.awt.event.ActionListener() {
+        txtBuscarFolio.setFont(new java.awt.Font("Segoe UI Semibold", 2, 14)); // NOI18N
+        txtBuscarFolio.setForeground(new java.awt.Color(51, 51, 51));
+        txtBuscarFolio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBusquedaFolioActionPerformed(evt);
+                txtBuscarFolioActionPerformed(evt);
             }
         });
-        getContentPane().add(txtBusquedaFolio, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 150, -1));
+        getContentPane().add(txtBuscarFolio, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 120, -1));
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
@@ -253,16 +281,16 @@ public class VistaVentas extends javax.swing.JFrame {
         jLabel10.setToolTipText("");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 440, -1, -1));
 
-        btnPendientes1.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
-        btnPendientes1.setForeground(new java.awt.Color(51, 51, 51));
-        btnPendientes1.setText("Pendientes");
-        btnPendientes1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, new java.awt.Color(102, 102, 102)));
-        btnPendientes1.addActionListener(new java.awt.event.ActionListener() {
+        btnPendientes.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
+        btnPendientes.setForeground(new java.awt.Color(51, 51, 51));
+        btnPendientes.setText("Pendientes");
+        btnPendientes.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, new java.awt.Color(102, 102, 102)));
+        btnPendientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPendientes1ActionPerformed(evt);
+                btnPendientesActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPendientes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 540, 130, -1));
+        getContentPane().add(btnPendientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 540, 130, -1));
 
         txtNombre.setEditable(false);
         txtNombre.setBackground(new java.awt.Color(255, 255, 255));
@@ -309,9 +337,9 @@ public class VistaVentas extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnVolverActionPerformed
 
-    private void txtBusquedaFolioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBusquedaFolioActionPerformed
+    private void txtBuscarFolioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarFolioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtBusquedaFolioActionPerformed
+    }//GEN-LAST:event_txtBuscarFolioActionPerformed
 
     private void txtSubTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSubTotalActionPerformed
         // TODO add your handling code here:
@@ -325,13 +353,25 @@ public class VistaVentas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEstadoActionPerformed
 
-    private void btnPendientes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPendientes1ActionPerformed
+    private void btnPendientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPendientesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnPendientes1ActionPerformed
+    }//GEN-LAST:event_btnPendientesActionPerformed
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
+
+    private void comboxVentasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboxVentasItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboxVentasItemStateChanged
+
+    private void comboxVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboxVentasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboxVentasActionPerformed
+
+    private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSeleccionarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -342,8 +382,10 @@ public class VistaVentas extends javax.swing.JFrame {
     public javax.swing.JButton btnComprobar;
     public javax.swing.JButton btnHistorial;
     public javax.swing.JButton btnLimpiar;
-    public javax.swing.JButton btnPendientes1;
+    public javax.swing.JButton btnPendientes;
+    public javax.swing.JButton btnSeleccionar;
     public javax.swing.JButton btnVolver;
+    public javax.swing.JComboBox<String> comboxVentas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
@@ -354,7 +396,7 @@ public class VistaVentas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JTextField txtBusquedaFolio;
+    public javax.swing.JTextField txtBuscarFolio;
     public javax.swing.JTextArea txtDetalles;
     public javax.swing.JTextField txtEstado;
     public javax.swing.JTextField txtFecha;
@@ -387,6 +429,9 @@ public class VistaVentas extends javax.swing.JFrame {
    }
     public void msg(String txt){
        JOptionPane.showMessageDialog(null, txt, "Eliminada",JOptionPane.INFORMATION_MESSAGE);
+   }  
+    public String capturar(String txt){
+       return JOptionPane.showInputDialog(txt);
    }  
    
 }

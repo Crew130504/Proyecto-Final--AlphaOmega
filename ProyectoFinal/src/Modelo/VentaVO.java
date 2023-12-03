@@ -14,7 +14,10 @@ public class VentaVO {
     private double subtotal;
     private double total;
 
-    public VentaVO(String cliente, String folio, String fecha, String hora, String estado, String detalles, ArrayList<ProductoVO> producto, ArrayList<Carrito> carrito, double subtotal, double total) {
+    public VentaVO(String cliente, String folio, String fecha, 
+            String hora, String estado, String detalles, 
+            ArrayList<ProductoVO> producto, ArrayList<Carrito> carrito, 
+            double subtotal, double total) {
         this.cliente = cliente;
         this.folio = folio;
         this.fecha = fecha;
@@ -26,6 +29,18 @@ public class VentaVO {
         this.subtotal = subtotal;
         this.total = total;
     }
+
+    public VentaVO(String cliente, String folio, String fecha, String hora, String estado, String detalles, double subtotal, double total) {
+        this.cliente = cliente;
+        this.folio = folio;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.estado = estado;
+        this.detalles = detalles;
+        this.subtotal = subtotal;
+        this.total = total;
+    }
+    
     public VentaVO() {
     } 
 

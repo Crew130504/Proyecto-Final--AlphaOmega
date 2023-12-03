@@ -45,7 +45,6 @@ public class VistaMenu extends javax.swing.JFrame {
         btnProductos = new javax.swing.JButton();
         btnInventario = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        btnClientes1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -72,7 +71,12 @@ public class VistaMenu extends javax.swing.JFrame {
         btnClientes.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         btnClientes.setText("Clientes");
         btnClientes.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, new java.awt.Color(102, 102, 102)));
-        getContentPane().add(btnClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 82, 70, -1));
+        btnClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClientesActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 70, -1));
 
         btnProveedores.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         btnProveedores.setText("Proveedores");
@@ -97,9 +101,6 @@ public class VistaMenu extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Fondos/Icono2.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-270, 0, 740, 300));
 
-        btnClientes1.setText("Clientes");
-        getContentPane().add(btnClientes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 82, -1, -1));
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -111,10 +112,13 @@ public class VistaMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnVolverActionPerformed
 
+    private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnClientesActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnClientes;
-    public javax.swing.JButton btnClientes1;
     public javax.swing.JButton btnInventario;
     public javax.swing.JButton btnProductos;
     public javax.swing.JButton btnProveedores;

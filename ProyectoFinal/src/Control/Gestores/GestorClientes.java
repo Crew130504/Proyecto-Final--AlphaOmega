@@ -1,12 +1,12 @@
 package Control.Gestores;
 
 import Control.DAO.ClientesDAO;
+import Control.DAO.VentasDAO;
 import Modelo.ClienteVO;
 import Vista.Admin.VistaClientes;
 import Vista.Admin.VistaTabla;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 public class GestorClientes implements ActionListener {
@@ -14,6 +14,7 @@ public class GestorClientes implements ActionListener {
     private ArrayList<ClienteVO> listaClientes;
     private VistaTabla vistaTabla = new VistaTabla();
     private ClientesDAO miClienteDAO = new ClientesDAO();
+    private VentasDAO miVentaDAO = new VentasDAO();
     private ClienteVO objCliente = new ClienteVO();
     private VistaClientes vista;
     private GestorMenu gestorMenu;
@@ -26,6 +27,7 @@ public class GestorClientes implements ActionListener {
         this.vista.btnModificar.addActionListener(this);
         this.vista.btnEliminar.addActionListener(this);
         this.vista.btnLista.addActionListener(this);
+        this.vista.btnHistorial.addActionListener(this);
     }
 
     public void iniciar(GestorMenu vuelta) {
@@ -123,6 +125,9 @@ public class GestorClientes implements ActionListener {
         
         if(e.getSource() == this.vista.btnLista){
             this.vistaTabla.mostrarVentana(this.miClienteDAO.cargarDatosTabla(), "CLIENTES");
+        }
+        if(e.getSource() == this.vista.btnHistorial){
+            this.vistaTabla.mostrarVentana(this.miVentaDAO.cargarDatosTablaCliente(this.vista.txtNombre.getText()), "HISTORIAL");
         }
     }
 }

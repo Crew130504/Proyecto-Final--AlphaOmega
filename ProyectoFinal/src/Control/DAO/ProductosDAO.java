@@ -542,7 +542,7 @@ public class ProductosDAO {
         return null;
     }
 
-    public int consultarporNombre(String nombre) {
+    public int consultarStockporNombre(String nombre) {
         String consulta = "SELECT * FROM producto WHERE nombre='" + nombre + "'";
         try {
             // Obtiene una conexión a la base de datos
@@ -577,15 +577,50 @@ public class ProductosDAO {
         }
         return 0;
     }
+    public ProductoVO consultarEncargoporNombre(String nombre) {
+        String consulta = "SELECT * FROM producto WHERE nombre='" + nombre + "'";
+        try {
+            // Obtiene una conexión a la base de datos
+            con = Conexion.getConexion();
+            // Crea una declaración SQL
+            st = (Statement) con.createStatement();
+            // Ejecuta la consulta
+            rs = st.executeQuery(consulta);
+
+            while (rs.next()) {
+                String tipo = rs.getString("tipo");
+                // Crea objetos ProductoVO y los agrega a la lista
+                ProductoVO miProducto = (comprobarTipo(tipo, rs.getString("id"), rs.getString("nombre"),
+                        rs.getString("serie"), rs.getString("precio"), rs.getString("cantidad"),
+                        rs.getString("cantidadMin"), rs.getString("encargo"), rs.getString("imagen"),
+                        rs.getString("descripcion"), rs.getString("pais"), rs.getString("fabricante"),
+                        rs.getString("peso"), rs.getString("medidas"), rs.getString("garantia"),
+                        rs.getString("proveedor")));
+                if (miProducto.getEncargo().equals("SI") || miProducto.getEncargo().equals("Si")) {
+                    return miProducto;
+                } else {
+                    return null;
+                }
+            }
+            // Cierra la declaración y desconecta de la base de datos
+            st.close();
+            Conexion.desconectar();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            // Manejo de excepciones en caso de error
+            vista.errorConsola("No se pudo");
+        }
+        return null;
+    }
 
     public String salida(ArrayList<Carrito> listaCompra) {
         int cantidad = 0;
         boolean pendiente=false;
         for (Carrito producto : listaCompra) {
-            if (consultarporNombre(producto.getNombre()) == 0) {
+            if (consultarStockporNombre(producto.getNombre()) == 0) {
                 pendiente =true;
             }
-                cantidad = (consultarporNombre(producto.getNombre()) - producto.getCantidad());
+                cantidad = (consultarStockporNombre(producto.getNombre()) - producto.getCantidad());
                 String modificacion = "UPDATE `producto` SET `cantidad`=" + cantidad + " WHERE nombre='" + producto.getNombre() + "'";
 
                 try {

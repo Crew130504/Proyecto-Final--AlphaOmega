@@ -91,6 +91,34 @@ public class HistorialInventarioDAO {
         }
         
     }
+    public void ingresoCantidad(ProductoVO producto,int cantidad){
+        try {
+            // Obtiene una conexión a la base de datos
+            con = Conexion.getConexion();
+            // Consulta de inserción con PreparedStatement
+            String insercion = "INSERT INTO historialinventario VALUES (?, ?, ?)";
+            // Crea una consulta preparada
+            PreparedStatement pst = (PreparedStatement) con.prepareStatement(insercion);
+
+            // Establece los parámetros de la consulta
+            pst.setString(1, producto.getNombre());
+            pst.setDouble(2, cantidad);
+            pst.setString(3, "INGRESO");
+
+            // Ejecuta la consulta de inserción
+            pst.executeUpdate();
+
+            // Cierra la declaración y desconecta de la base de datos
+            pst.close();
+            Conexion.desconectar();
+
+        } catch (SQLException ex) {
+            // Manejo de excepciones en caso de error
+            ex.printStackTrace();
+            vista.errorConsola("NO INSERCION");
+        }
+        
+    }
     public void salida(ArrayList<Carrito> listaCompra){
         try {
             // Obtiene una conexión a la base de datos

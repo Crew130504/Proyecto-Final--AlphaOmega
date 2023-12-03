@@ -54,6 +54,7 @@ public class GestorProductos implements ActionListener {
     }
 
     public void iniciar(GestorMenu vuelta) {
+        this.vista.limpiar();
         // Centra la vistaBienvenida en el centro de la pantalla
         this.vuelta = vuelta;
         this.vista.setLocationRelativeTo(null);
@@ -65,6 +66,7 @@ public class GestorProductos implements ActionListener {
     }
 
     public void iniciar() {
+        this.vista.limpiar();
         // Centra la vistaBienvenida en el centro de la pantalla
         this.vista.setLocationRelativeTo(null);
         this.vista.setResizable(false);
@@ -358,6 +360,7 @@ public class GestorProductos implements ActionListener {
             String nombre = (String) this.vista.comboxPendientes.getSelectedItem();
             for (ProductoVO miProducto : listaProductos) {
                 if (miProducto.getNombre().equals(nombre)) {
+                    this.miHistorialDAO.ingresoCantidad(miProducto,(miProducto.getMinStock() * 2)-miProducto.getStock());
                     miProducto.setStock(miProducto.getMinStock() * 2);
                     this.miProductoDAO.actualizarDatos(miProducto);
                     break;  // Se detiene después de encontrar la primera coincidencia
@@ -440,7 +443,7 @@ public class GestorProductos implements ActionListener {
         if (e.getSource() == this.vistaI.btnSolicitar) {
             llenarComboRecibir();
             this.vista.msg("SOLICITANDO FALTANTES");
-            this.vistaTabla.mostrarVentana(this.miProductoDAO.cargarDatosTabla(), "PRODUCTOS");
+            this.vistaTabla.mostrarVentana(this.miProductoDAO.cargarDatosTabla(), "VENTAS");
         }
 
     }

@@ -60,7 +60,7 @@ public class GestorMenu implements ActionListener {
         //Boton vista ventas
         if (e.getSource() == vista.btnVentas) {
             vista.setVisible(false);
-            //gestorVentas.iniciar();
+            gestorVentas.iniciar(this);
 
         }
 
